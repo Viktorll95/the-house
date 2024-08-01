@@ -478,13 +478,64 @@ const story = {
       "Bad vibes, don't like it",
       "Needs cleaning!",
     ]);
-    setOpFn([story.part8, story.part8, story.part8]);
+    setOpFn([story.part9, story.part9, story.part9]);
     setOpNpcCom([
       "Yeah, could be better but it worse",
       "Well, I wasn't really expecting a five star hotell standard so this is nice enough IMO",
       "Yeah, maybe I get paid extra if I help with the cleaning ;)",
     ]);
+  },
+  part9: function () {
+    npcMessage(
+      "Oh yeah and I found this note on the table. I'm just gonna scan it with my camera"
+    );
+    npcMessage(
+      `Dear [Her Name],
+
+Welcome once again, and thank you for taking on this overnight task. As always, your safety and the security of the house are of utmost importance. Please adhere strictly to the following rules:
+
+1. Close all windows and doors before midnight (00:00).
+
+2. Do not, under any circumstances, open the door or windows between 00:00 and 06:00.
+
+3. There are some more rules to be read at the dining room table.
+
+4. Do not stare in the mirror past 00:00; a glimpse is fine, don’t worry about it, but don’t look for too long.
+
+5. If your things aren’t where you left them, calmly leave the room, and when you return, they should be back.
+
+6. If any of the paintings are upside down, burn them immediately.
+
+Remember, follow these rules exactly as they are. Your safety depends on it.
+
+Thank you for your diligence and discretion. I trust you will find everything in order.
+
+Best regards,
+
+Mr. Whitaker`,
+      4000,
+      500
+    );
+
+    npcMessageAndSetOptText("So same rules as before, except three new one", [
+      "Hope the money is worth it",
+      "You can do it!",
+      "This is a big NOPE",
+    ]);
+    setOpFn([story.part10, story.part10, story.part10]);
+    setOpNpcCom(
+      [
+        "Ugh, I hope so too",
+        "Thank you, I needed to hear that",
+        "Yeah... I'm actually kinda having some second thoughts now",
+      ],
+      "I was thinking, maybe to invite a friend over? And ofc having them leaving the house before 00:00"
+    );
+  },
+
+  part10: function () {
     npcMessage("THE LIMIT HAS BEEN REACHED");
+    // npcMessageAndSetOptText("What do you think?", []);
   },
 };
 

@@ -1,4 +1,6 @@
 body {
+  height: 98vh;
+  width: 98vw;
   background: linear-gradient(
     45deg,
     rgb(45, 39, 161) 0%,
@@ -35,18 +37,25 @@ button:active {
 .chat-input-form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding-left: 4%;
+  padding-right: 4%;
+  box-sizing: border-box;
 }
 
 .btn-option {
-  height: 38px;
+  width: 100%;
 
   border: none;
-  padding: 0.625em;
+  padding: 0.5em;
   border-radius: 0.5em;
 
-  gap: 1em;
-  font-size: 1em;
-  margin: 0.5em;
+  font-size: 0.9em;
+
+  margin: 5px 0px;
 
   cursor: pointer;
   background-color: #15202b;
@@ -59,23 +68,6 @@ button:active {
 .btn-option:active {
   background-color: #0d141b;
 }
-
-/*
-FIXME: Remove this commented code later
-  .person-selector {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 1em;
-  margin: 1em auto 1em;
-  max-width: 40em;
-}
-
-.person-selector-button {
-  width: 100%;
-  background-color: #15202b;
-  color: white;
-} */
 
 .messeger {
   width: 100%;
@@ -91,18 +83,20 @@ FIXME: Remove this commented code later
 
 .chat-container {
   background: #15202b;
-  background: linear-gradient(180deg, #15202b 71.2%, rgb(22, 118, 138) 0%);
   font-family: sans-serif;
-  border-radius: 0.5em;
-  padding: 0.5em 1.25em;
+  border-radius: 1em;
   margin: auto;
-  width: 37.5em;
-  max-width: 37.5em;
-  height: 35.5em;
+  width: 80%;
+  max-width: 1000px;
+  height: 80%;
   box-shadow: 0 0 0.5em 0.1em #c3c3c333;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 .chat-header {
+  padding: 0.25em 1.5em;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -116,7 +110,9 @@ FIXME: Remove this commented code later
 }
 
 .chat-messages {
-  height: 23.27em;
+  padding-left: 4%;
+  padding-right: 4%;
+  height: 90%;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -166,14 +162,27 @@ FIXME: Remove this commented code later
   margin: 2em auto;
 }
 
+.form-container {
+  background-color: #1c9bef7c;
+  height: 12em;
+  border-radius: 0em 0em 1em 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .submit-name-form {
   width: 100%;
-  height: 25%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 1%;
+  padding-left: 1em;
+  padding-right: 1em;
+  box-sizing: border-box;
 }
 .input-user-name {
   width: 100%;
@@ -194,8 +203,6 @@ FIXME: Remove this commented code later
 
 .hidden {
   opacity: 0;
-  transition: 1s;
-  /* For height transition */
   height: 0;
   overflow: hidden;
   transition: opacity 1s ease-in-out, height 1s ease-in-out;
@@ -242,117 +249,32 @@ img {
   background-color: rgb(255, 255, 255);
 }
 
-@media (min-width: 670px) {
-  body {
-    height: 100vh;
-  }
-
-  .chat-container {
-    background: #15202b;
-    background: linear-gradient(180deg, #15202b 71.8%, rgb(22, 118, 138) 0%);
-  }
-}
-
-@media (max-width: 670px) {
-  body {
-    height: 100vh;
-    width: 100vw;
-    margin: auto;
-  }
-
-  .chat-container {
-    background: #15202b;
-    background: linear-gradient(180deg, #15202b 70%, rgb(22, 118, 138) 0%);
-  }
-
-  .chat-container {
-    height: 95vh;
-    width: 85vw;
-  }
-
-  .chat-input-form {
-    background-color: rgb(22, 118, 138);
-  }
-
-  .btn-option {
-    height: 7vh;
-  }
-
-  .all {
-    display: flex;
-    flex-direction: column;
-  }
-}
-
 @media (max-width: 450px) {
-  body {
-    height: 100vh;
-    width: 100vw;
-    margin: auto;
-  }
-
-  .chat-messages {
-    height: 72%;
-  }
-
   .chat-container {
-    background: #15202b;
-    background: linear-gradient(180deg, #15202b 76.2%, rgb(22, 118, 138) 0%);
-  }
-
-  .btn-option {
-    height: 5.7vh;
+    width: 90%;
+    height: 95%;
   }
 
   .btn-enter-name {
-    width: 80px;
-  }
-}
-
-@media (max-height: 800px) {
-  .chat-messages {
-    height: 71%;
+    width: 30%;
   }
 
-  .chat-container {
-    background: #15202b;
-    background: linear-gradient(180deg, #15202b 76.2%, rgb(22, 118, 138) 0%);
-  }
-
-  .btn-option {
-    height: 5.2vh;
-    font-size: 0.9rem;
-  }
-
-  .btn-enter-name {
-    width: 80px;
+  .message {
+    width: 85%;
   }
 }
 
 @media (min-width: 1000px) {
-  .chat-header h2 {
-    font-size: 1.4em;
-  }
-
   .chat-container {
-    height: 55em;
+    border-radius: 0.5em;
+    width: 60%;
+    max-width: 1000px;
   }
-
-  .chat-messages {
-    height: 39.17em;
+  .form-container {
+    border-radius: 0em 0em 0.5em 0.5em;
   }
-
-  .message {
-    font-size: 1.2em;
-  }
-
-  .chat-container {
-    background: #15202b;
-    background: linear-gradient(180deg, #15202b 76.2%, rgb(22, 118, 138) 0%);
-  }
-
-  .btn-option {
-    height: 55px;
-    font-size: 1rem;
+  .submit-name-form {
+    padding-left: 5%;
+    padding-right: 5%;
   }
 }

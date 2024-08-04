@@ -90,7 +90,7 @@ const npcMessage = (
 
   ///////////////////////////////////////////////////////////
   //FIXME:FIXME:FIXME: THIS PIECE OF CODE IS USED FOR DEVELOPMENT. TO SEND THE NPC TEXT WITHOUT ANY DELAY
-  // currTextDelayTotal = textingDelay = 0;
+  currTextDelayTotal = textingDelay = 0;
   ////////////////////////////////////////////////////////
 
   setTimeout(() => {

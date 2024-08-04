@@ -399,8 +399,8 @@ const story = {
       "Okay, what does it say?",
       "Well if you must...",
       "No just skip it, let's go",
-    ]),
-      setOpFn([story.part5c, story.part5c, story.part6]);
+    ]);
+    setOpFn([story.part5c, story.part5c, story.part5d]);
     setOpNpcCom([
       "I think so too",
       "Then I really 'must'",
@@ -408,14 +408,57 @@ const story = {
     ]);
   },
 
+  // Part5c down below:
+  // Variable that keeps track if the player has read the rules
+  hasReadRules: false,
+  // Variable that holds the rules, so they won't have to be written again
+  rules: `Dear ${npcName},
+
+    Thank you for taking on this overnight task. As always, your safety and the security of the house are of utmost importance. Please adhere strictly to the following rules:
+    
+    1. Close all windows and doors before midnight (00:00).
+    
+    2. Do not, under any circumstances, open the door or windows between 00:00 and 06:00.
+    
+    3. If your things aren’t where you left them, calmly leave the room, and when you return, they should be back.
+    
+    4. If any of the paintings are upside down, burn them immediately.
+
+    5. If you find notes with more rules, follow them, if they are signed by me "Mr. Whitaker", otherwise, don't follow them.
+    
+    Remember, follow these rules exactly as they are. Your safety depends on it.
+    
+    Thank you for your diligence and discretion. I trust you will find everything in order.
+    
+    Best regards,
+    
+    Mr. Whitaker`,
   part5c: function () {
-    npcMessage("Yup, there are some rules");
-    npcMessage("It says: 1, Close all windows and doors");
+    npcMessage(
+      "It's from Whitaker all right. Hold on, I'll scan in with my camera"
+    );
+    npcMessage(story.rules, 4000, 500);
+    npcMessageAndSetOptText(`Well, that's that`, [
+      "Must be some kind of joke",
+      "Spooky",
+      `I don't like this at all`,
+    ]);
+    setOpFn([story.part5d, story.part5d, story.part5d]);
+    setOpNpcCom(
+      [
+        "I don't think it is thought",
+        "Sure is",
+        "Yeah, it's not the most pleasent way to make money",
+      ],
+      "But it pays well, and it has always been fine as I have always followed the rules"
+    );
+    story.hasReadRules = true;
   },
 
-  // FIXME:FIXME:FIXME:
   part5d: function () {
-    npcMessage("I'll get back to you in about half an hour");
+    npcMessage(
+      "I'll get back to you in about half an hour when I'm at the house"
+    );
     fastForwardClock(`${hours}:${minutes + 29}`, story.part6);
   },
 
@@ -490,25 +533,11 @@ const story = {
       "Oh yeah and I found this note on the table. I'm just gonna scan it with my camera"
     );
     npcMessage(
-      `Dear [Her Name],
+      `Dear ${npcName},
 
-Welcome once again, and thank you for taking on this overnight task. As always, your safety and the security of the house are of utmost importance. Please adhere strictly to the following rules:
+Welcome once again.
 
-1. Close all windows and doors before midnight (00:00).
-
-2. Do not, under any circumstances, open the door or windows between 00:00 and 06:00.
-
-3. There are some more rules to be read at the dining room table.
-
-4. Do not stare in the mirror past 00:00; a glimpse is fine, don’t worry about it, but don’t look for too long.
-
-5. If your things aren’t where you left them, calmly leave the room, and when you return, they should be back.
-
-6. If any of the paintings are upside down, burn them immediately.
-
-Remember, follow these rules exactly as they are. Your safety depends on it.
-
-Thank you for your diligence and discretion. I trust you will find everything in order.
+Please help yourself to the kitchen and you are more then welcome to invite your friends over if you want to. Just remember the rules.
 
 Best regards,
 
@@ -516,26 +545,66 @@ Mr. Whitaker`,
       4000,
       500
     );
-
-    npcMessageAndSetOptText("So same rules as before, except three new one", [
-      "Hope the money is worth it",
-      "You can do it!",
-      "This is a big NOPE",
-    ]);
-    setOpFn([story.part10, story.part10, story.part10]);
-    setOpNpcCom(
-      [
-        "Ugh, I hope so too",
-        "Thank you, I needed to hear that",
-        "Yeah... I'm actually kinda having some second thoughts now",
-      ],
-      "I was thinking, maybe to invite a friend over? And ofc having them leaving the house before 00:00"
-    );
   },
 
-  part10: function () {
+  part9b: function () {
+    npcMessageAndSetOptText(story.rules, [
+      "So the food is fine to eat",
+      `So don't eat the food`,
+      story.hasReadRules ? `Thanks` : `Sorry about being pushy`,
+    ]);
+    setOpFn(story.part10a1, story.part10a2, story.part10a3);
+    setOpNpcCom([
+      `Right? Since the note is signed by Whitaker`,
+      ``,
+      story.hasReadRules
+        ? "I'm the one who should thank you for the help!"
+        : "Don't worry about it",
+    ]);
+  },
+
+  part10a1: function () {
+    npcMessage("Nice, hold on one sec...");
+    story.isHungry = false;
+    npcMessage("That's alot better", 5000);
+    npcMessageAndSetOptText("So I was thinking...", [
+      "Yeah?",
+      "What about?",
+      "...",
+    ]);
+    setOpFn([story.part11, story.part11, story.part11]);
+  },
+
+  part10a2: function () {
+    npcMessage("Well, cant think about that too much anyway");
+    npcMessageAndSetOptText("So I was thinking...", [
+      "Yeah?",
+      "What about?",
+      "...",
+    ]);
+    setOpFn([story.part11, story.part11, story.part11]);
+  },
+
+  part10a3: function () {
+    npcMessageAndSetOptText(
+      "So do you think I could get a snack or should I avoid it?",
+      [
+        "Yeah, sure take a snack!",
+        "Something is off, you shouldn't",
+        "You can decide",
+      ]
+    );
+    setOpFn([story.part10a1, story.part10a2, story.part10a1]);
+    setOpNpcCom([
+      "A snack it is then!",
+      `Maybe that's for the best, unfortunately I'm a bit hungry...`,
+      "A snack it is then!",
+    ]);
+  },
+
+  part11: function () {
+    npcMessage("About inviting a friend over");
     npcMessage("THE LIMIT HAS BEEN REACHED");
-    // npcMessageAndSetOptText("What do you think?", []);
   },
 };
 

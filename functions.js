@@ -60,8 +60,7 @@ const fastForwardClock = function (timeInMinutesAndHours, nextfunction) {
     inputTime[1] = inputTime[1] % 60;
   }
   if (inputTime[0] >= 24) inputTime[0] = inputTime[0] % 24;
-  console.log(inputTime[0]);
-  console.log(inputTime[1]);
+  console.log(inputTime[0] + ":" + inputTime[1]);
 
   let diffHours =
     inputTime[0] - hours >= 0

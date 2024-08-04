@@ -219,7 +219,6 @@ btnOptionList.forEach((btnOption, i) =>
         opt.userChoice[i] = false;
       });
       opt.userChoice[i] = true;
-      console.log(opt.userChoice);
       if (opt.comment[i]) npcMessage(opt.comment[i]);
       opt.comment.length = 0;
       commentAfterOption();

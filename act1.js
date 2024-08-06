@@ -1,5 +1,41 @@
 "use strict";
 
+// Variable that holds the rules, so they won't have to be written again
+const rules = `Dear ${npcName},
+<br>
+<br>
+Thank you for taking on this overnight task. As always, your safety and the security of the house are of utmost importance. Please adhere strictly to the following rules:
+<br>
+<br>
+1. Close all windows and doors before midnight (00:00).
+<br>
+2. Do not, under any circumstances, open the door or windows between 00:00 and 06:00.
+<br>
+3. If your things aren’t where you left them, calmly leave the room, and when you return, they should be back.
+<br>
+  4. If any of the paintings are upside down, burn them immediately.
+  <br>
+  5. Do not turn on the radio, if it turns on by itself, turn it off.
+  <br>
+  6. If you find notes with more rules, follow them, if they are signed by me "Mr. Whitaker", otherwise, don't follow them.
+  <br>
+  <br>
+  Remember, follow these rules exactly as they are. Your safety depends on it.
+  <br>
+  Thank you for your diligence and discretion. I trust you will find everything in order.
+  <br>
+  <br>
+  Best regards,
+  <br>
+  Mr. Whitaker`;
+// Variable that keeps track if the player has read the rules
+let hasReadRules = false;
+let isHungry = true;
+let likesPlayer = 0;
+let isPissed = false;
+let orderedPizza = false;
+let pizzaOrderedStr = "";
+
 /////////////////////////////
 // The game itself:
 
@@ -7,7 +43,7 @@ const startStory = function () {
   // FIXME:FIXME:FIXME: Uncomment "pre.part1();" and comment out the other function
   pre.part1();
   // npcName = "Anna";
-  // story.part11();
+  // act1.part8();
 };
 
 const askToRestart = function () {
@@ -253,17 +289,17 @@ const act1 = {
       npcMessage("I'm actually there soon, text you in a bit!");
     } else if (hours < 17 && hours > 12) {
       npcMessage(
-        "I'll be there this eevening at around 18. I'll text you when I'm there"
+        "I'll be there this eevening at around 19. I'll text you when I'm there"
       );
     } else if (hours < 6) {
       npcMessage(
-        "Sorry for keeping you up at this hour. I'll text you at about 18 when I'm picking up the keys"
+        "Sorry for keeping you up at this hour. I'll text you at about 19 when I'm picking up the keys"
       );
     } else {
-      npcMessage("I'll text you at about 18 when I'm picking up the keys");
+      npcMessage("I'll text you at about 19 when I'm picking up the keys");
     }
     npcMessage("😉");
-    fastForwardClock("18:23", act1.part4);
+    fastForwardClock("19:03", act1.part4);
   },
 
   part4: function () {
@@ -292,7 +328,7 @@ const act1 = {
         "Wait nine minutes in the car",
       ]
     );
-    //FIXME:FIXME:FIXME:FIXME:FIXME: If one of the functions doesn't work. Does that mean no the function will be the previous function??
+
     setOpFn([act1.part4c, act1.part4c, act1.part4c]);
     setOpNpcCom([
       "No time to waste!",
@@ -411,40 +447,11 @@ const act1 = {
     ]);
   },
 
-  // Part5c down below:
-  // Variable that keeps track if the player has read the rules
-  hasReadRules: false,
-  // Variable that holds the rules, so they won't have to be written again
-  rules: `Dear ${npcName},
-    <br>
-    <br>
-    Thank you for taking on this overnight task. As always, your safety and the security of the house are of utmost importance. Please adhere strictly to the following rules:
-    <br>
-    <br>
-    1. Close all windows and doors before midnight (00:00).
-    <br>
-    2. Do not, under any circumstances, open the door or windows between 00:00 and 06:00.
-    <br>
-    3. If your things aren’t where you left them, calmly leave the room, and when you return, they should be back.
-    <br>
-    4. If any of the paintings are upside down, burn them immediately.
-    <br>
-    5. If you find notes with more rules, follow them, if they are signed by me "Mr. Whitaker", otherwise, don't follow them.
-    <br>
-    <br>
-    Remember, follow these rules exactly as they are. Your safety depends on it.
-    <br>
-    Thank you for your diligence and discretion. I trust you will find everything in order.
-    <br>
-    <br>
-    Best regards,
-    <br>
-    Mr. Whitaker`,
   part5c: function () {
     npcMessage(
       "It's from Whitaker all right. Hold on, I'll scan in with my camera"
     );
-    npcMessage(act1.rules, 4000, 500);
+    npcMessage(rules, 4000, 500);
     npcMessageAndSetOptText(`Well, that's that`, [
       "Okay, I'll try to remember them",
       "Spooky",
@@ -459,14 +466,12 @@ const act1 = {
       ],
       "It has actually always been fine, and as said, I have always followed the rules"
     );
-    act1.hasReadRules = true;
+    hasReadRules = true;
   },
 
   part5d: function () {
-    npcMessage(
-      "I'll get back to you in about half an hour when I'm at the house"
-    );
-    fastForwardClock(`${hours}:${minutes + 29}`, act1.part6);
+    npcMessage("I'll get back to you in about an hour when I'm at the house");
+    fastForwardClock(`${19}:${46}`, act1.part6);
   },
 
   part6: function () {
@@ -560,13 +565,13 @@ const act1 = {
     npcMessageAndSetOptText(`That's all it says`, [
       "So the food is fine to eat",
       `So don't eat the food`,
-      act1.hasReadRules ? `Thanks` : `Maybe we should have read the rules...`,
+      hasReadRules ? `Thanks` : `Maybe we should have read the rules...`,
     ]);
     setOpFn([act1.part10a1, act1.part10a2, act1.part9b]);
     setOpNpcCom([
       `Right? Since the note is signed by Whitaker`,
       `Maybe that's for the best, even thought I'm quite hungry`,
-      act1.hasReadRules
+      hasReadRules
         ? "I'm the one who should thank you for the help!"
         : "Yes, but lucky for us (or me) I kept the note",
     ]);
@@ -582,8 +587,8 @@ const act1 = {
   },
 
   part9c: function () {
-    act1.hasReadRules = true;
-    npcMessage(act1.rules, 4000);
+    hasReadRules = true;
+    npcMessage(rules, 4000);
     npcMessageAndSetOptText("So do you think the food is safe?", [
       "So you can eat the food",
       "So don't eat the food",
@@ -599,7 +604,7 @@ const act1 = {
 
   part10a1: function () {
     npcMessage("Nice, hold on one sec...");
-    act1.isHungry = false;
+    isHungry = false;
     npcMessage("That's alot better", 5000);
     npcMessageAndSetOptText("So I was thinking...", [
       "Yeah?",
@@ -641,26 +646,157 @@ const act1 = {
     npcMessageAndSetOptText("What do you think?", [
       "Yes, sure if you feel like it!",
       `Maybe it's better to not do that`,
-      act1.hasReadRules
-        ? `Sure! Just remember the rules`
-        : `No, it's a dumb idea`,
+      hasReadRules ? `Sure! Just remember the rules` : `No, it's a dumb idea`,
     ]);
-    setOpFn([act1.part12, act1.part12, act1.part12]);
+    setOpFn([act1F.part12, act1NoF.part12, act1F.part12]);
     setOpNpcCom([
       "I deff do!",
       "Yeah maybe, better not risk anything...",
-      act1.hasReadRules
+      hasReadRules
         ? `Yep, and as you know, it's allowed :D (until 00:00 ofc!)`
         : `...Okay, thx for the response sunshine`,
     ]);
   },
-  part12alt1: function () {
-    npcMessageAndSetOptText("THE LIMIT HAS BEEN REACHED");
+};
+
+const act1F = {
+  askedToBuyFood: false,
+  part12: function () {
+    npcMessage("Okay I just texted her to come");
+    npcMessageAndSetOptText("She will be here in like half an hour!", [
+      isHungry ? "Ask her to bring food!" : "Cool!",
+      "Hope she likes scary stuff",
+      "Just don't forget the rules",
+    ]);
+    setOpFn([act1F.part13, act1F.part13, act1F.part13]);
+    setOpNpcCom([
+      isHungry ? "Great idea!" : "🥳",
+      "She sure does, even more than me",
+      "Thanks for the reminder! 00:00!",
+    ]);
   },
-  part12alt2: function () {
-    npcMessage("THE LIMIT HAS BEEN REACHED");
+  part13: function () {
+    if (isHungry && lastChoiceNum === 0) act1F.askedToBuyFood = true;
+    npcMessageAndSetOptText("I bet she'll love this place!", [
+      "Who is she by the way?",
+      "I hope so, I wouldn't 😅",
+      "...",
+    ]);
+    setOpFn([act1F.part13b, act1F.part14, act1F.part14]);
+    setOpNpcCom(["Ofc!", "She's crazy about creepy and spooky stuff"]);
+  },
+  part13b: function () {
+    npcMessage(
+      "So, we met freshman year. I ended up in the wrong class and didn't realize it until it was too late."
+    );
+    npcMessage(
+      "I was too embarrassed to leave. Then Emily, who I didn't know at the time, raised her hand, and the professor thought she had a question."
+    );
+    npcMessage(
+      "Instead, she just said, 'Sorry, wrong room,' and got up. I saw my chance and quickly said, 'Me too!'"
+    );
+    npcMessageAndSetOptText(
+      "We both walked out laughing, and we've been friends ever since.",
+      ["She sounds like fun!", "😂😂😂", "How stupid..."]
+    );
+    // TODO:TODO:TODO: Implement a function that keeps track of if the npc likes the player
+    setOpFn([act1F.part13c, act1F.part13c, act1F.part13c]);
+    setOpNpcCom(["She sure is! 😁", "😄👌", "...yeah maybe a bit, anyway..."]);
+  },
+
+  part13c: function () {
+    npcMessage(
+      "I'm going to catch up on my studies while I wait for her, text you in a bit"
+    );
+    fastForwardClock(`${hours}:${minutes + 30}`, act1F.part14);
+  },
+
+  part14: function () {
+    npcMessage("She's here!");
+    act1F.askedToBuyFood
+      ? npcMessage(
+          "She says she forgot to buy food thought but she will order us some pizza 🥳"
+        )
+      : npcMessage(
+          "I think I'm going to buy us some food so we don't bankrupt Whitaker 😅"
+        );
+    npcMessageAndSetOptText(
+      `I'm not sure which one I should get thought, which one is your favourite?`,
+      ["Margherita", "Pepperoni", "Capricciosa"]
+    );
+    setOpFn([act1F.part14b, act1F.part14b, act1F.part14b]);
+    setOpNpcCom([
+      `Ah, you are a vanilla type person 😉 I used to be a bit vanilla myself... So for today Margaritha it is!`,
+      `Nice, a bit spicy is excactly what this evening needs 😁 I'll take a pepperoni!`,
+      `Then let's try this pizzeria's capricciosa!`,
+    ]);
+  },
+
+  part14b: function () {
+    orderedPizza = true;
+    switch (lastChoiceNum) {
+      case 0:
+        pizzaOrderedStr = "margaritha and pineapple pizza";
+      case 1:
+        pizzaOrderedStr = "pepperoni and pineapple pizza";
+      case 2:
+        pizzaOrderedStr = "capricciosa and pineapple pizza";
+    }
+    npcMessageAndSetOptText(`Emily ordered a pinaepple pizza!`, [
+      `Oh that's nasty 😅`,
+      `I actually like those`,
+      `Who cares`,
+    ]);
+    setOpFn([act1F.part14c, act1F.part14c, act1F.part14c]);
+    setOpNpcCom([
+      `Yeah, not my thing either 😂`,
+      `Maybe you are as crazy as Emily then 😉`,
+      `...`,
+    ]);
+  },
+
+  part14c: function () {
+    npcMessage("We are going to catch up at bit while we wait fyi 😊");
+    fastForwardClock(`${hours}:${minutes + 32}`, act1F.part15);
+  },
+  part15: function () {
+    btnOpShow([
+      `How’s it going ${npcName}? All good?`,
+      `Got your pizza yet?`,
+      `${npcName}`,
+    ]);
+    setOpFn([act1F.part16, act1F.part16, act1F.part16]);
+    setOpNpcCom([
+      `All good ${playerName}! We haven't got our pizza yet thought, but I found some snacks in my bag 😊`,
+      `No pizza yet, but I found some snacks in my bag so we are surviving😊`,
+      `Oh sorry! Lost track of time! All good! Altought no pizza yet, but I found some snacks in my bag so we are surviving!`,
+    ]);
+  },
+  //TODO: The time is about 21:00 ATP
+  part16: function () {
+    fastForwardClock("21:24");
+    btnOpShow([
+      `${npcName} maybe your friend should leave soon?`,
+      `Now you must have gotten your Pizza`,
+      `All good?`,
+    ]);
+    setOpFn([act1F.part17, act1F.part17, act1F.part17]);
+    setOpNpcCom([
+      `Chillout ${playerName}, it's not that late yet 😄`,
+      "No actually we haven't...",
+      "Yep all good! We still haven't gotten our pizza yet doe",
+    ]);
+  },
+
+  part17: function () {
+    if (lastChoiceNum === 0)
+      npcMessage("We still haven't gotten our pizza doe...");
+    npcMessage(
+      "Emily is actually thinking of going to a store to get some more snacks"
+    );
   },
 };
+const act1NoF = {};
 
 ///////////////////////////////////////////////////////////////////
 const storyFail = {

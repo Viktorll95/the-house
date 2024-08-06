@@ -12,6 +12,7 @@ const option0El = document.querySelector("#option0");
 const option1El = document.querySelector("#option1");
 const option2El = document.querySelector("#option2");
 const btnOptionList = document.querySelectorAll(".btn-option");
+let lastChoiceNum;
 
 const chatHeaderName = document.querySelector(".chat-header-name");
 const chatMessages = document.querySelector(".chat-messages");
@@ -212,13 +213,15 @@ const commentAfterOption = function () {
 btnOptionList.forEach((btnOption, i) =>
   btnOption.addEventListener("click", (e) => {
     e.preventDefault();
-    if (npcTextsInProgress === 0) {
+    if (npcTextsInProgress === 0 && currTextDelayTotal === 0) {
       happyPop.play();
       sendMessage(btnOption.textContent, playerName, btnOption.id);
       opt.userChoice.forEach((userChoice, i) => {
         opt.userChoice[i] = false;
+        lastChoiceNum = undefined;
       });
       opt.userChoice[i] = true;
+      lastChoiceNum = i;
       if (opt.comment[i]) npcMessage(opt.comment[i]);
       opt.comment.length = 0;
       commentAfterOption();

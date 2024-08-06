@@ -765,22 +765,25 @@ const act1F = {
       `Got your pizza yet?`,
       `${npcName}`,
     ]);
-    setOpFn([act1F.part16, act1F.part16, act1F.part16]);
+    setOpFn([act1F.part15, act1F.part15, act1F.part15]);
     setOpNpcCom([
       `All good ${playerName}! We haven't got our pizza yet thought, but I found some snacks in my bag 😊`,
       `No pizza yet, but I found some snacks in my bag so we are surviving😊`,
       `Oh sorry! Lost track of time! All good! Altought no pizza yet, but I found some snacks in my bag so we are surviving!`,
     ]);
   },
+
+  part15: function () {
+    fastForwardClock("21:24", act1F.part16);
+  },
   //TODO: The time is about 21:00 ATP
   part16: function () {
-    fastForwardClock("21:24");
     btnOpShow([
       `${npcName} maybe your friend should leave soon?`,
-      `Now you must have gotten your Pizza`,
+      `Now you must have gotten your pizzas`,
       `All good?`,
     ]);
-    setOpFn([act1F.part17, act1F.part17, act1F.part17]);
+    setOpFn([act1F.part16b, act1F.part17, act1F.part17]);
     setOpNpcCom([
       `Chillout ${playerName}, it's not that late yet 😄`,
       "No actually we haven't...",
@@ -788,12 +791,175 @@ const act1F = {
     ]);
   },
 
+  part16b: function () {
+    npcMessageAndSetOptText("We still haven't gotten our pizza doe...", [
+      "Still really think your friend should leave",
+      "Really? Maybe call them?",
+      "That's wierd",
+    ]);
+    setOpFn([act1F.part16c, act1F.part17, act1F.part17]);
+    setOpNpcCom;
+    npcMessageAndSetOptText([
+      "Hm, really think so?",
+      "We tried but got no answer...",
+      "Yeah, we actually tried calling but got no answer",
+    ]);
+  },
+
+  part16c: function () {
+    btnOpShow([
+      "Yes, what if you forget?",
+      "You shouldn't take any risks",
+      "Maybe she can stay for a while",
+    ]);
+    setOpFn([
+      act1F.part17,
+      act1F.part17 /*<--TODO: The first two functions should lead to another branch in the story*/,
+      act1F.part17,
+    ]);
+    setOpNpcCom([
+      "I mean, it wouldn't likely happen but there is a small risk... Maybe it's for the best",
+      "Yeah, maybe your right",
+      "Yeah, just help me keep track of time and it's all good 😄",
+    ]);
+  },
+
   part17: function () {
-    if (lastChoiceNum === 0)
-      npcMessage("We still haven't gotten our pizza doe...");
-    npcMessage(
-      "Emily is actually thinking of going to a store to get some more snacks"
+    npcMessageAndSetOptText(
+      "Emily is actually thinking of going to a store to get some more snacks",
+      ["Sounds good", "Now? Ar this hour?", "Tell her to not do it"]
     );
+    setOpFn([act1F.part17b, act1F.part17b, act1F.part17b]);
+    setOpNpcCom(
+      [
+        "Yep!",
+        "Haha yeah, I coulnd't stop her even if I tried",
+        "She actually already went. It's impossible to stop that girl when she has an idea",
+      ],
+      "She said it will take her about 20 minutes"
+    );
+  },
+
+  part17b: function () {
+    fastForwardClock(`${hours}:${minutes + 25}`, act1F.part18);
+  },
+
+  part18: function () {
+    npcMessageAndSetOptText(
+      "It's been 25 minutes, I feel like she should be back now",
+      ["She's only 5 mins late", "You should call her", "I think she died"]
+    );
+    setOpFn([act1F.part18b, act1F.part18b, act1F.part18b]);
+    setOpNpcCom([
+      "Yeah I guess, but it's not like her to be late",
+      "I will",
+      "Ha... ha... really. funny",
+    ]);
+  },
+
+  part18b: function () {
+    npcMessage(
+      "Just called her, she's not answering, guess I'll give it some more time"
+    );
+    fastForwardClock(`${hours}:${minutes + 10}`, act1F.part19);
+  },
+
+  part19: function () {
+    npcMessage(
+      "She should have been here fiften minutes ago and she's not, and she doesn't answer her phone"
+    );
+    npcMessageAndSetOptText("What should I do?", [
+      "She's just a bit late, it's fine",
+      "Call the police",
+      "Go look for her",
+    ]);
+    setOpFn([act1F.part19b, act1F.part20, act1F.part19b]);
+    setOpNpcCom([]);
+  },
+
+  part19b: function () {
+    if (lastChoiceNum === 0) {
+      npcMessage("I'll wait a bit more");
+      fastForwardClock(`${hours}:${minutes + 15}`, act1F.part20);
+    }
+    if (lastChoiceNum === 2) {
+      npcMessageAndSetOptText(
+        `I guess I could, but I can't go far away from the house`,
+        [
+          `Yeah you probably shouldn't`,
+          `Nevermind, wait inside`,
+          `Just try to go a little bit`,
+        ]
+      );
+      setOpFn([]);
+      setOpNpcCom([]);
+    }
+  },
+
+  part19c: function () {
+    if (lastChoiceNum === 0 || lastChoiceNum === 1) {
+      npcMessage("I'm going to wait a bit longer for her...");
+      fastForwardClock(`${hours}:${minutes + 15}`, act1F.part20);
+    } else {
+      npcMessage(`Okay, I'll look around the neighborhood`);
+      fastForwardClock(`${hours}:${minutes + 10}`, act1F.part19d);
+    }
+  },
+
+  part19d: function () {
+    npcMessageAndSetOptText("Still no sign of her, what should I do?", [
+      "Go back",
+      "I don't know",
+      "Keep looking",
+    ]);
+    setOpFn([act1F.part19e, act1F.part19e, act1F.part19e]);
+  },
+
+  part19e: function () {
+    if (lastChoiceNum === 2) {
+      fastForwardClock(`${hours}:${minutes + 13}`, storyFail.part4h);
+    } else {
+      npcMessage(`I guess I'll go back then`);
+      npcMessageAndSetOptText(`Ugh, this doesn't feel good`, [
+        `It's going to be fine`,
+        `Don't blame yourself`,
+        `You should never have invited her`,
+      ]);
+      setOpFn(act1F.part19f, act1F.part19f, act1F.part19f);
+      setOpNpcCom([
+        "Thanks, I really neede to hear that actually",
+        "Thanks, I really neede to hear that actually",
+        "Maybe you are right...",
+      ]);
+    }
+  },
+
+  part19f() {
+    npcMessage("As soon as I'm back, I'm calling the police");
+    fastForwardClock(`${hours}:${minutes + 5}`, act1F.part19f);
+  },
+
+  part20: function () {
+    npcMessage("Okay, I'm calling the police now, hold on");
+    npcMessageAndSetOptText(
+      `"All our operators are busy"... IS THIS A JOKE`,
+      [
+        "Don't like this, be careful",
+        "Just try again in 5 mins",
+        "Try calling her again",
+      ],
+      6000
+    );
+    setOpFn([act1F.part21, act1F.part21, act1F.part21]);
+    setOpNpcCom([
+      "Me nether, something feels wrong",
+      `Okay... I'm getting a bit stressed thought`,
+      `Just tried, still not answering`,
+    ]);
+  },
+
+  part21: function () {
+    npcMessage("THE LIMIT HAS BEEN REACHED");
   },
 };
 const act1NoF = {};

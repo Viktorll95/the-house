@@ -648,7 +648,7 @@ const act1 = {
       `Maybe it's better to not do that`,
       hasReadRules ? `Sure! Just remember the rules` : `No, it's a dumb idea`,
     ]);
-    setOpFn([act1F.part12, act1NoF.part12, act1F.part12]);
+    setOpFn([a2F.part12, act1NoF.part12, a2F.part12]);
     setOpNpcCom([
       "I deff do!",
       "Yeah maybe, better not risk anything...",
@@ -659,7 +659,7 @@ const act1 = {
   },
 };
 
-const act1F = {
+const a2F = {
   askedToBuyFood: false,
   part12: function () {
     npcMessage("Okay I just texted her to come");
@@ -668,7 +668,7 @@ const act1F = {
       "Hope she likes scary stuff",
       "Just don't forget the rules",
     ]);
-    setOpFn([act1F.part13, act1F.part13, act1F.part13]);
+    setOpFn([a2F.part13, a2F.part13, a2F.part13]);
     setOpNpcCom([
       isHungry ? "Great idea!" : "🥳",
       "She sure does, even more than me",
@@ -676,13 +676,13 @@ const act1F = {
     ]);
   },
   part13: function () {
-    if (isHungry && lastChoiceNum === 0) act1F.askedToBuyFood = true;
+    if (isHungry && lastChoiceNum === 0) a2F.askedToBuyFood = true;
     npcMessageAndSetOptText("I bet she'll love this place!", [
       "Who is she by the way?",
       "I hope so, I wouldn't 😅",
       "...",
     ]);
-    setOpFn([act1F.part13b, act1F.part14, act1F.part14]);
+    setOpFn([a2F.part13b, a2F.part14, a2F.part14]);
     setOpNpcCom(["Ofc!", "She's crazy about creepy and spooky stuff"]);
   },
   part13b: function () {
@@ -700,7 +700,7 @@ const act1F = {
       ["She sounds like fun!", "😂😂😂", "How stupid..."]
     );
     // TODO:TODO:TODO: Implement a function that keeps track of if the npc likes the player
-    setOpFn([act1F.part13c, act1F.part13c, act1F.part13c]);
+    setOpFn([a2F.part13c, a2F.part13c, a2F.part13c]);
     setOpNpcCom(["She sure is! 😁", "😄👌", "...yeah maybe a bit, anyway..."]);
   },
 
@@ -708,12 +708,12 @@ const act1F = {
     npcMessage(
       "I'm going to catch up on my studies while I wait for her, text you in a bit"
     );
-    fastForwardClock(`${hours}:${minutes + 30}`, act1F.part14);
+    fastForwardClock(`${hours}:${minutes + 30}`, a2F.part14);
   },
 
   part14: function () {
     npcMessage("She's here!");
-    act1F.askedToBuyFood
+    a2F.askedToBuyFood
       ? npcMessage(
           "She says she forgot to buy food thought but she will order us some pizza 🥳"
         )
@@ -724,7 +724,7 @@ const act1F = {
       `I'm not sure which one I should get thought, which one is your favourite?`,
       ["Margherita", "Pepperoni", "Capricciosa"]
     );
-    setOpFn([act1F.part14b, act1F.part14b, act1F.part14b]);
+    setOpFn([a2F.part14b, a2F.part14b, a2F.part14b]);
     setOpNpcCom([
       `Ah, you are a vanilla type person 😉 I used to be a bit vanilla myself... So for today Margaritha it is!`,
       `Nice, a bit spicy is excactly what this evening needs 😁 I'll take a pepperoni!`,
@@ -747,7 +747,7 @@ const act1F = {
       `I actually like those`,
       `Who cares`,
     ]);
-    setOpFn([act1F.part14c, act1F.part14c, act1F.part14c]);
+    setOpFn([a2F.part14c, a2F.part14c, a2F.part14c]);
     setOpNpcCom([
       `Yeah, not my thing either 😂`,
       `Maybe you are as crazy as Emily then 😉`,
@@ -757,7 +757,7 @@ const act1F = {
 
   part14c: function () {
     npcMessage("We are going to catch up at bit while we wait fyi 😊");
-    fastForwardClock(`${hours}:${minutes + 32}`, act1F.part15);
+    fastForwardClock(`${hours}:${minutes + 32}`, a2F.part15);
   },
   part15: function () {
     btnOpShow([
@@ -765,7 +765,7 @@ const act1F = {
       `Got your pizza yet?`,
       `${npcName}`,
     ]);
-    setOpFn([act1F.part15, act1F.part15, act1F.part15]);
+    setOpFn([a2F.part15, a2F.part15, a2F.part15]);
     setOpNpcCom([
       `All good ${playerName}! We haven't got our pizza yet thought, but I found some snacks in my bag 😊`,
       `No pizza yet, but I found some snacks in my bag so we are surviving😊`,
@@ -774,7 +774,7 @@ const act1F = {
   },
 
   part15: function () {
-    fastForwardClock("21:24", act1F.part16);
+    fastForwardClock("21:24", a2F.part16);
   },
   //TODO: The time is about 21:00 ATP
   part16: function () {
@@ -783,7 +783,7 @@ const act1F = {
       `Now you must have gotten your pizzas`,
       `All good?`,
     ]);
-    setOpFn([act1F.part16b, act1F.part17, act1F.part17]);
+    setOpFn([a2F.part16b, a2F.part17, a2F.part17]);
     setOpNpcCom([
       `Chillout ${playerName}, it's not that late yet 😄`,
       "No actually we haven't...",
@@ -793,13 +793,12 @@ const act1F = {
 
   part16b: function () {
     npcMessageAndSetOptText("We still haven't gotten our pizza doe...", [
-      "Still really think your friend should leave",
+      "Still really I think your friend should leave",
       "Really? Maybe call them?",
       "That's wierd",
     ]);
-    setOpFn([act1F.part16c, act1F.part17, act1F.part17]);
-    setOpNpcCom;
-    npcMessageAndSetOptText([
+    setOpFn([a2F.part16c, a2F.part17, a2F.part17]);
+    setOpNpcCom([
       "Hm, really think so?",
       "We tried but got no answer...",
       "Yeah, we actually tried calling but got no answer",
@@ -813,9 +812,9 @@ const act1F = {
       "Maybe she can stay for a while",
     ]);
     setOpFn([
-      act1F.part17,
-      act1F.part17 /*<--TODO: The first two functions should lead to another branch in the story*/,
-      act1F.part17,
+      a2F.part17,
+      a2F.part17 /*<--TODO: The first two functions should lead to another branch in the story*/,
+      a2F.part17,
     ]);
     setOpNpcCom([
       "I mean, it wouldn't likely happen but there is a small risk... Maybe it's for the best",
@@ -829,7 +828,7 @@ const act1F = {
       "Emily is actually thinking of going to a store to get some more snacks",
       ["Sounds good", "Now? Ar this hour?", "Tell her to not do it"]
     );
-    setOpFn([act1F.part17b, act1F.part17b, act1F.part17b]);
+    setOpFn([a2F.part17b, a2F.part17b, a2F.part17b]);
     setOpNpcCom(
       [
         "Yep!",
@@ -841,7 +840,7 @@ const act1F = {
   },
 
   part17b: function () {
-    fastForwardClock(`${hours}:${minutes + 25}`, act1F.part18);
+    fastForwardClock(`${hours}:${minutes + 25}`, a2F.part18);
   },
 
   part18: function () {
@@ -849,7 +848,7 @@ const act1F = {
       "It's been 25 minutes, I feel like she should be back now",
       ["She's only 5 mins late", "You should call her", "I think she died"]
     );
-    setOpFn([act1F.part18b, act1F.part18b, act1F.part18b]);
+    setOpFn([a2F.part18b, a2F.part18b, a2F.part18b]);
     setOpNpcCom([
       "Yeah I guess, but it's not like her to be late",
       "I will",
@@ -861,7 +860,7 @@ const act1F = {
     npcMessage(
       "Just called her, she's not answering, guess I'll give it some more time"
     );
-    fastForwardClock(`${hours}:${minutes + 10}`, act1F.part19);
+    fastForwardClock(`${hours}:${minutes + 10}`, a2F.part19);
   },
 
   part19: function () {
@@ -873,14 +872,14 @@ const act1F = {
       "Call the police",
       "Go look for her",
     ]);
-    setOpFn([act1F.part19b, act1F.part20, act1F.part19b]);
+    setOpFn([a2F.part19b, a2F.part20, a2F.part19b]);
     setOpNpcCom([]);
   },
 
   part19b: function () {
     if (lastChoiceNum === 0) {
       npcMessage("I'll wait a bit more");
-      fastForwardClock(`${hours}:${minutes + 15}`, act1F.part20);
+      fastForwardClock(`${hours}:${minutes + 15}`, a2F.part20);
     }
     if (lastChoiceNum === 2) {
       npcMessageAndSetOptText(
@@ -899,10 +898,10 @@ const act1F = {
   part19c: function () {
     if (lastChoiceNum === 0 || lastChoiceNum === 1) {
       npcMessage("I'm going to wait a bit longer for her...");
-      fastForwardClock(`${hours}:${minutes + 15}`, act1F.part20);
+      fastForwardClock(`${hours}:${minutes + 15}`, a2F.part20);
     } else {
       npcMessage(`Okay, I'll look around the neighborhood`);
-      fastForwardClock(`${hours}:${minutes + 10}`, act1F.part19d);
+      fastForwardClock(`${hours}:${minutes + 10}`, a2F.part19d);
     }
   },
 
@@ -912,7 +911,7 @@ const act1F = {
       "I don't know",
       "Keep looking",
     ]);
-    setOpFn([act1F.part19e, act1F.part19e, act1F.part19e]);
+    setOpFn([a2F.part19e, a2F.part19e, a2F.part19e]);
   },
 
   part19e: function () {
@@ -925,7 +924,7 @@ const act1F = {
         `Don't blame yourself`,
         `You should never have invited her`,
       ]);
-      setOpFn(act1F.part19f, act1F.part19f, act1F.part19f);
+      setOpFn(a2F.part19f, a2F.part19f, a2F.part19f);
       setOpNpcCom([
         "Thanks, I really neede to hear that actually",
         "Thanks, I really neede to hear that actually",
@@ -936,7 +935,7 @@ const act1F = {
 
   part19f() {
     npcMessage("As soon as I'm back, I'm calling the police");
-    fastForwardClock(`${hours}:${minutes + 5}`, act1F.part19f);
+    fastForwardClock(`${hours}:${minutes + 5}`, a2F.part19f);
   },
 
   part20: function () {
@@ -950,7 +949,7 @@ const act1F = {
       ],
       6000
     );
-    setOpFn([act1F.part21, act1F.part21, act1F.part21]);
+    setOpFn([a2F.part21, a2F.part21, a2F.part21]);
     setOpNpcCom([
       "Me nether, something feels wrong",
       `Okay... I'm getting a bit stressed thought`,
@@ -959,6 +958,210 @@ const act1F = {
   },
 
   part21: function () {
+    npcMessageAndSetOptText("Wow", [
+      "Wow?",
+      "What's happening?",
+      "Everything all right?",
+    ]);
+    setOpFn([a2F.part22, a2F.part22, a2F.part22]);
+  },
+
+  part22: function () {
+    npcMessageAndSetOptText("There is was a knock on the door", [
+      "Open it then, it's Emily",
+      "Ask who it is",
+      "Ignore it",
+    ]);
+    setOpFn([a2F.part25, a2F.part25, a2F.part25]);
+  },
+
+  part23: function () {
+    if (lastChoiceNum === 1) {
+      npcMessage(`I just asked who it is`);
+      npcMessage(`Oh, it's Emily`);
+    }
+    if (lastChoiceNum === 1) {
+      npcMessage("Okay");
+      npcMessage("I think I'm hearing Emily's voice", 4000);
+      npcMessage("Yep, it's definitely her voice");
+    }
+    npcMessageAndSetOptText("I'm going to let her in", [
+      "Do it",
+      "What took her so long?",
+      "WAIT",
+    ]);
+    setOpFn([a2F.part26, a2F.part26, a2F.part24]);
+    setOpNpcCom([
+      "Wonder what took her so long",
+      "I don't know, but I'm going to find out",
+      undefined,
+    ]);
+  },
+
+  part24: function () {
+    npcMessageAndSetOptText("Wait for what?", [
+      "Don't open it, it's not her",
+      "Ask her about how you met",
+      "Nevermind, just let her in",
+    ]);
+    setOpFn([a2F.part25, a2F.part25, a2F.part26]);
+    setOpNpcCom([undefined, "Very smart!", "Okay, hope you are sure"]);
+  },
+
+  part25: function () {
+    if (lastChoiceNum === 0) {
+      npcMessageAndSetOptText("How can you be so sure?", [
+        "The rules says so",
+        "I'm just havning a bad feeling",
+        "I'm not",
+      ]);
+      setOpFn([a2F.part25b, a2F.part25b, a2F.part26]);
+      setOpNpcCom([
+        undefined,
+        undefined,
+        "If you are not sure, then I'm letting her in",
+      ]);
+    }
+    if (lastChoiceNum === 1) {
+      npcMessage("Okay, she answered correctly, I'm letting her in");
+      a2F.part26();
+    }
+  },
+
+  part25b: function () {
+    npcMessage("Okay, she sounds pretty pissed");
+    npcMessage("I'm trying to convince her but she's calling me crazy", 4000);
+    setOpFn([a2F.part25c, a2F.part25c, a2F.part25c]);
+    npcMessageAndSetOptText(
+      "I wanna let her in, I don't want to lose a friend",
+      [
+        "Okay. Maybe let her in then",
+        "Just make it up to her later",
+        "It's not your friend",
+      ]
+    );
+  },
+
+  part25c: function () {
+    npcMessage(`Okay, I think she's leaving now`, 4000);
+    npcMessageAndSetOptText(`My god, I feel awful`, [
+      `You did what was necessary`,
+      "Don't worry about it",
+      "Shit happens",
+    ]);
+    setOpFn([
+      /* SET NEW FUNCTIONS THAT CONTINUES THIS BRANCH */
+    ]);
+  },
+
+  part26: function () {
+    npcMessage("I'm opening the door");
+    npcMessage("Yeah it's her alright", 8000);
+    npcMessage(
+      "Apparently she dropped her phone, it broke, and therefore she had a hard time finding her way back..."
+    );
+    npcMessageAndSetOptText("That's a relief", [
+      "Good to hear everything worked out",
+      "I was scared for a bit there",
+      "Tell her she's clumsy",
+    ]);
+    setOpFn([a2F.part27, a2F.part27, a2F.part27]);
+    setOpNpcCom([
+      "Yeah, feels like a load is lifted of my shoulders...",
+      "Yeah, feels like a load is lifted of my shoulders...",
+      "She says that a geek as unadventerous as you aren't allowed to voice an opinion 😅",
+    ]);
+  },
+
+  part27: function () {
+    fastForwardClock(`${hours}:${minutes + 6}`, a2F.part28);
+  },
+
+  part28: function () {
+    npcMessage(`Hey ${playerName}, it's definitely Emily`);
+    npcMessage(`She's as clumsy, funny and adventereus as usual`);
+    npcMessageAndSetOptText(
+      `The only thing that's different is her horrible music taste, my ears are bleeding 🤣`,
+      ["What do you mean", "🤣", "Where is the music playing from?"]
+    );
+    setOpFn([a2F.part29, a2F.part31, a2F.part30]);
+  },
+
+  part29: function () {
+    npcMessageAndSetOptText(
+      "I mean her horrible boy-band taste in music is awful 😂",
+      [
+        "I actually like boy-bands",
+        "Turn it off!",
+        "Where is the music playing from?",
+      ]
+    );
+    setOpFn([a2F.part31, a2F.part31, a2F.part30]);
+    setOpNpcCom([
+      "Oh... Sorry then... 😅",
+      "Yeah, maybe that's for the best",
+      undefined,
+    ]);
+  },
+
+  part30: function () {
+    npcMessageAndSetOptText(
+      "That's the worst part, it's playing from her awful phone speakers",
+      [`Oh, that's a relief`, `Ask her to turn it off`, `...`]
+    );
+    setOpFn([a2F.part31, a2F.part31, a2F.part31]);
+    setOpNpcCom([
+      "Oh yeah, you thought it came from the radio... Thanks for having my back!",
+      "Yeah, maybe that's for the best",
+      undefined,
+    ]);
+  },
+  part31: function () {
+    npcMessage(`I think I will be AFK for a while 😊`);
+    fastForwardClock("11:13", a2F.part32);
+  },
+  part32: function () {
+    btnOpShow([`${npcName}`, "Hello!", "Are you there?"]);
+    setOpFn([a2F.part33, a2F.part33, a2F.part33]);
+  },
+
+  part33: function () {
+    fastForwardClock("11:21", a2F.part34);
+  },
+
+  part34: function () {
+    btnOpShow([`${npcName.toUpperCase()}!!`, "Helloooooo", "ANSWER!"]);
+    setOpFn([a2F.part35, a2F.part35, a2F.part35]);
+    setOpNpcCom([`${playerName}!!`, "Hello to you too!", "Yes?"]);
+  },
+  part35: function () {
+    btnOpShow([
+      `Look at the time ${npcName.toUpperCase()}!`,
+      "Your friend needs to leave!",
+      "Oh, it's nothing",
+    ]);
+    setOpFn([
+      a2F.part36,
+      a2F.part36,
+      /*TODO: A function that failes the game should be here: */ a2F.part36,
+    ]);
+  },
+  part36: function () {
+    npcMessage("OH SH*T");
+    npcMessage("Thanks!!!");
+    npcMessage("I'll tell her right away");
+    npcMessage(`${playerName} you are not going to believe this`, 5000);
+    npcMessageAndSetOptText(
+      `But one of the paintings are upside down. I don’t know it’s been like this before we got here but Emily said she’s sure no painting was upside down when we got here.`
+    ),
+      ["You need to burn it", "Chop it to pieces", "Nevermind that!"];
+    setOpFn([
+      a2F.part37,
+      a2F.part37 /*TODO: A function that failes the game should be here: */,
+      a2F.part37 /*TODO: A function that failes the game should be here: */,
+    ]);
+  },
+  part37: function () {
     npcMessage("THE LIMIT HAS BEEN REACHED");
   },
 };

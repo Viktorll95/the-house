@@ -41,9 +41,9 @@ let pizzaOrderedStr = "";
 
 const startStory = function () {
   // FIXME:FIXME:FIXME: Uncomment "pre.part1();" and comment out the other function
-  pre.part1();
-  // npcName = "Anna";
-  // act1.part8();
+  // pre.part1();
+  npcName = "Anna";
+  a2F.part33();
 };
 
 const askToRestart = function () {
@@ -972,7 +972,7 @@ const a2F = {
       "Ask who it is",
       "Ignore it",
     ]);
-    setOpFn([a2F.part25, a2F.part25, a2F.part25]);
+    setOpFn([a2F.part25, a2F.part23, a2F.part23]);
   },
 
   part23: function () {
@@ -1118,7 +1118,7 @@ const a2F = {
   },
   part31: function () {
     npcMessage(`I think I will be AFK for a while 😊`);
-    fastForwardClock("11:13", a2F.part32);
+    fastForwardClock("23:33", a2F.part32);
   },
   part32: function () {
     btnOpShow([`${npcName}`, "Hello!", "Are you there?"]);
@@ -1126,7 +1126,7 @@ const a2F = {
   },
 
   part33: function () {
-    fastForwardClock("11:21", a2F.part34);
+    fastForwardClock("23:41", a2F.part34);
   },
 
   part34: function () {
@@ -1150,11 +1150,11 @@ const a2F = {
     npcMessage("OH SH*T");
     npcMessage("Thanks!!!");
     npcMessage("I'll tell her right away");
-    npcMessage(`${playerName} you are not going to believe this`, 5000);
+    npcMessage(`${playerName} you are not going to believe this`);
     npcMessageAndSetOptText(
-      `But one of the paintings are upside down. I don’t know it’s been like this before we got here but Emily said she’s sure no painting was upside down when we got here.`
-    ),
-      ["You need to burn it", "Chop it to pieces", "Nevermind that!"];
+      `But one of the paintings are upside down. I don’t know it’s been like this before we got here but Emily said she’s sure no painting was upside down when we got here.`,
+      ["You need to burn it", "Chop it to pieces", "Nevermind that!"]
+    );
     setOpFn([
       a2F.part37,
       a2F.part37 /*TODO: A function that failes the game should be here: */,
@@ -1162,6 +1162,89 @@ const a2F = {
     ]);
   },
   part37: function () {
+    npcMessage("Okay I just need to find matchsticks or something...");
+    npcMessage("Got it!", 5000);
+    fastForwardClock(`${hours}:${minutes + 5}`, a2F.part38);
+  },
+  part38: function () {
+    npcMessage("I never thought I woul'd be doing this...");
+    npcMessage(`<img src="images/burning-painting.png" alt="">`);
+    npcMessage(`Hope Whitaker doesn't get mad...`, 0, 0);
+    npcMessageAndSetOptText(
+      "Just said goodbye to Emily as well",
+      [`Good NOW GET BACK IN`, `Look at the time!`, `No, why would he be mad?`],
+      0,
+      0
+    );
+    setOpFn([a2F.part39, a2F.part39, a2F.part38b]);
+    setOpNpcCom([
+      "Oh yeah right, it's late",
+      "Oh yeah right, it's late, let's get back inside",
+      "Cause I burned a painting of his?",
+    ]);
+  },
+
+  part38b: function () {
+    npcMessageAndSetOptText("I'd think he'd be a bit mad", [
+      "But you had to",
+      "Worry about that later, get inside",
+      "Yeah actually he might be pretty pissed",
+    ]);
+  },
+  part38c: function () {
+    npcMessageAndSetOptText("Sh*t... Oh well, gotta get back in now...", [
+      "Yes, that's for the best",
+      "Good!",
+      "Clean up the painting first!",
+    ]);
+    setOpFn([a2F.part39, a2F.part38d, a2F.part38d]);
+  },
+
+  part38d: function () {},
+
+  part39: function () {
+    npcMessageAndSetOptText("I just need a second...", [
+      "Sure, take a rest",
+      "Wait...",
+      "I was just wondering...",
+    ]);
+    setOpFn([n2F.part40, n2F.part41n2F.part41]);
+  },
+
+  part40: function () {
+    //TODO: Here should the "clocktriggerfunction" (or what it's called), be set to make the player lose if the windows and doors are not closed at 00:00
+    fastForwardClock("11:57", n2F.part41);
+  },
+  part41: function () {
+    btnOpShow([
+      "Are all doors and windows closed?",
+      "Is the radio on?",
+      "Nevermind",
+    ]);
+    setOpFn([a2F.part42, a2F.part45, a2F.part45]);
+    setOpNpcCom([undefined, "No, it's not", "Okay"]);
+  },
+  part42: function () {
+    npcMessage("DARN, I forgot about that. Give me a second...");
+    fastForwardClock(`${hours}:${minutes + 2}`, a2F.part44);
+  },
+
+  part44: function () {
+    // TODO: ALL DOORS AND WINDOWS CLOSED: The "triggerclock"-function should now be set to underfined
+    npcMessage("Okay done");
+    npcMessageAndSetOptText("Hopefully I made it in time", [
+      "Good work",
+      "Now you can rest!",
+      "Just saved your life 😉",
+    ]);
+    setOpFn([a2F.part45, a2F.part45, a2F.part45]);
+    setOpNpcCom([
+      "Thanks... I'm a bit tired now",
+      "Thanks... I'm a bit tired now",
+      "The scary thing is that you really might have...",
+    ]);
+  },
+  part45: function () {
     npcMessage("THE LIMIT HAS BEEN REACHED");
   },
 };

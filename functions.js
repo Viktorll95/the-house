@@ -28,9 +28,9 @@ const clockStrokeTrigger = function (minutesAndHoursString, func) {
   triggerStrokeFunc = func;
 };
 
-clockStrokeTrigger("18:30", () => {
-  console.log("test");
-});
+// clockStrokeTrigger("18:30", () => {
+//   console.log("test");
+// });
 
 const tick = setInterval(() => {
   seconds++;
@@ -100,6 +100,10 @@ const fastForwardClock = function (minutesAndHoursString, nextfunction) {
   let ffcIntervalPace = 10000 / (totalDiffMinutes + 1) ** 1.1;
 
   let delay = currTextDelayTotal + 2000;
+
+  //TODO: This 'btnOpHide()'-function may cause bugs, but I don't think so (yet)
+  btnOpHide();
+
   setTimeout(() => {
     ticTac.play();
     const flashClockBlueBg = setInterval(() => {

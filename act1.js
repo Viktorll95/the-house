@@ -483,12 +483,17 @@ const act1 = {
     npcMessage("Ugh I'm a bit hungry, should've stopped for some food");
     npcMessage("Anyway, I'm at the place");
     npcMessage("Imma send you a pic!");
-    npcMessage("What do you think?");
-    npcMessageAndSetOptText(`<img src="images/house.png" alt=""> The house! `, [
-      "Be careful!",
-      "Wouldn't enter it for even a million €",
-      "Looks great, easy money!",
-    ]);
+    npcMessage(`<img src="images/house.png" alt="">`);
+    npcMessageAndSetOptText(
+      `What do you think?`,
+      [
+        "Be careful!",
+        "Wouldn't enter it for even a million €",
+        "Looks great, easy money!",
+      ],
+      0,
+      0
+    );
     setOpFn([act1.part6b, act1.part6b, act1.part6b]),
       setOpNpcCom([
         "I will",
@@ -1207,9 +1212,10 @@ const a2F = {
   part38d: function () {},
 
   part39: function () {
+    npcMessage("There, back inside");
     npcMessageAndSetOptText("I just need a second...", [
       "Sure, take a rest",
-      "Wait...",
+      "Not yet! Remember?...",
       "I was just wondering...",
     ]);
     setOpFn([a2F.part40, a2F.part41, a2F.part41]);
@@ -1217,7 +1223,7 @@ const a2F = {
 
   part40: function () {
     //TODO: Here should the "clocktriggerfunction" (or what it's called), be set to make the player lose if the windows and doors are not closed at 00:00
-    fastForwardClock("11:57", a2F.part41);
+    fastForwardClock("23:57", a2F.part41);
   },
   part41: function () {
     btnOpShow([
@@ -1250,9 +1256,10 @@ const a2F = {
     ]);
   },
   part45: function () {
-    npcMessage("THE LIMIT HAS BEEN REACHED");
+    a2End.a2EndPart();
   },
 };
+
 const a2NoF = {
   askedToBuyFood: false,
   n12: function () {
@@ -1451,7 +1458,6 @@ const a2NoF = {
   n25b: function () {
     npcMessage("Okay, she sounds pretty pissed");
     npcMessage("I'm trying to convince her but she's calling me crazy", 4000);
-    setOpFn([a2NoF.n25c, a2NoF.n25c, a2NoF.n25c]);
     npcMessageAndSetOptText(
       "I wanna let her in, I don't want to lose a friend",
       [
@@ -1460,6 +1466,7 @@ const a2NoF = {
         "It's not your friend",
       ]
     );
+    setOpFn([a2NoF.n26, a2NoF.n25c, a2NoF.n25c]);
   },
 
   n25c: function () {
@@ -1470,7 +1477,15 @@ const a2NoF = {
       "Shit happens",
     ]);
     setOpFn([
-      /* SET NEW FUNCTIONS THAT CONTINUES THIS BRANCH */
+      /* The branch a2NoF continues here (a2NoF === act 2 no friend) */
+      a2NoF.n27,
+      a2NoF.n27,
+      a2NoF.n27,
+    ]);
+    setOpNpcCom([
+      "Yeah, I guess so",
+      "I'll try, still feel like an ass doe...",
+      "Yeah, I guess so",
     ]);
   },
 
@@ -1481,12 +1496,12 @@ const a2NoF = {
       "Apparently she thought of surprising me in the middle of the evening 🤣"
     );
     npcMessageAndSetOptText("That's a relief", [
-      "You got a fun friend 😁",
+      "You got a funny friend 😁",
       "I was scared for a bit there",
       "Tell her she's super wierd",
     ]);
-    // Here the functions are set back to the a2F-object
-    setOpFn([a2F.part27, a2F.part27, a2F.part27]);
+    // Here the functions are set back to the a2F-object (a2F === act 2 friend)
+    setOpFn([a2F.part31, a2F.part31, a2F.part31]);
     setOpNpcCom([
       "Right? 😉",
       "Yeah, feels like a load is lifted of my shoulders...",
@@ -1495,49 +1510,7 @@ const a2NoF = {
   },
 
   // Here continues the a2NoF branch
-  n27: function () {
-    fastForwardClock(`${hours}:${minutes + 6}`, a2NoF.n28);
-  },
 
-  n28: function () {
-    npcMessage(`Hey ${playerName}, it's definitely Emily`);
-    npcMessage(`She's as clumsy, funny and adventereus as usual`);
-    npcMessageAndSetOptText(
-      `The only thing that's different is her horrible music taste, my ears are bleeding 🤣`,
-      ["What do you mean", "🤣", "Where is the music playing from?"]
-    );
-    setOpFn([a2NoF.n29, a2NoF.n31, a2NoF.n30]);
-  },
-
-  n29: function () {
-    npcMessageAndSetOptText(
-      "I mean her horrible boy-band taste in music is awful 😂",
-      [
-        "I actually like boy-bands",
-        "Turn it off!",
-        "Where is the music playing from?",
-      ]
-    );
-    setOpFn([a2NoF.n31, a2NoF.n31, a2NoF.n30]);
-    setOpNpcCom([
-      "Oh... Sorry then... 😅",
-      "Yeah, maybe that's for the best",
-      undefined,
-    ]);
-  },
-
-  n30: function () {
-    npcMessageAndSetOptText(
-      "That's the worst part, it's playing from her awful phone speakers",
-      [`Oh, that's a relief`, `Ask her to turn it off`, `...`]
-    );
-    setOpFn([a2NoF.n31, a2NoF.n31, a2NoF.n31]);
-    setOpNpcCom([
-      "Oh yeah, you thought it came from the radio... Thanks for having my back!",
-      "Yeah, maybe that's for the best",
-      undefined,
-    ]);
-  },
   n31: function () {
     npcMessage(`I think I will be AFK for a while 😊`);
     fastForwardClock("23:33", aNo2F.n32);
@@ -1559,7 +1532,7 @@ const a2NoF = {
   n35: function () {
     btnOpShow([
       `Look at the time ${npcName.toUpperCase()}!`,
-      "Your friend needs to leave!",
+      "Have you locked the doors?",
       "Oh, it's nothing",
     ]);
     setOpFn([
@@ -1571,10 +1544,11 @@ const a2NoF = {
   n36: function () {
     npcMessage("OH SH*T");
     npcMessage("Thanks!!!");
-    npcMessage("I'll tell her right away");
-    npcMessage(`${playerName} you are not going to believe this`);
+    npcMessage("I'll make sure to lock the doors and windows!!");
+    npcMessage(`${playerName}...`, 5000);
+    npcMessage(`You are not going to believe this`);
     npcMessageAndSetOptText(
-      `But one of the paintings are upside down. I don’t know it’s been like this before we got here but Emily said she’s sure no painting was upside down when we got here.`,
+      `But one of the paintings are upside down. I'm pretty sure this painting wasn't like this when I arrived`,
       ["You need to burn it", "Chop it to pieces", "Nevermind that!"]
     );
     setOpFn([
@@ -1593,15 +1567,15 @@ const a2NoF = {
     npcMessage(`<img src="images/burning-painting.png" alt="">`);
     npcMessage(`Hope Whitaker doesn't get mad...`, 0, 0);
     npcMessageAndSetOptText(
-      "Just said goodbye to Emily as well",
+      "Guess I'll make sure to smother the last embers is the only thing I can go now",
       [`Good NOW GET BACK IN`, `Look at the time!`, `No, why would he be mad?`],
       0,
       0
     );
-    setOpFn([a2NoF.n39, a2NoF.n39, a2NoF.n38b]);
+    setOpFn([a2NoF.n42, a2NoF.n39, a2NoF.n38b]);
     setOpNpcCom([
       "Oh yeah right, it's late",
-      "Oh yeah right, it's late, let's get back inside",
+      "Yeah? But do you think I will lose the job cause of this?",
       "Cause I burned a painting of his?",
     ]);
   },
@@ -1612,6 +1586,8 @@ const a2NoF = {
       "Worry about that later, get inside",
       "Yeah actually he might be pretty pissed",
     ]);
+    setOpFn([a2NoF.n38d, a2NoF.n42, a2NoF.n38c]);
+    setOpNpcCom(["Yeah I guess so", undefined, undefined]);
   },
   n38c: function () {
     npcMessageAndSetOptText("Sh*t... Oh well, gotta get back in now...", [
@@ -1619,10 +1595,12 @@ const a2NoF = {
       "Good!",
       "Clean up the painting first!",
     ]);
-    setOpFn([a2NoF.n39, a2NoF.n38d, a2NoF.n38d]);
+    setOpFn([a2NoF.n39, a2NoF.n38d, a2NoF.n40]);
   },
 
-  n38d: function () {},
+  n38d: function () {
+    fastForwardClock(`${hours}:${minutes + 5}`, a2NoF.n41);
+  },
 
   n39: function () {
     npcMessageAndSetOptText("I just need a second...", [
@@ -1635,7 +1613,7 @@ const a2NoF = {
 
   n40: function () {
     //TODO: Here should the "clocktriggerfunction" (or what it's called), be set to make the player lose if the windows and doors are not closed at 00:00
-    fastForwardClock("11:57", a2NoF.n41);
+    fastForwardClock("23:57", a2NoF.n41);
   },
   n41: function () {
     btnOpShow([
@@ -1668,6 +1646,12 @@ const a2NoF = {
     ]);
   },
   n45: function () {
+    a2End.a2EndPart();
+  },
+};
+
+const a2End = {
+  a2EndPart: function () {
     npcMessage("THE LIMIT HAS BEEN REACHED");
   },
 };

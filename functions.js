@@ -46,7 +46,7 @@ const tick = setInterval(() => {
   updateClockEl(hours, minutes);
 }, 1000);
 
-function madMidnightClock() {
+function madClock() {
   const madInterval = setInterval(() => {
     const randomHours = String(Math.floor(Math.random() * 24)).padStart(2, "0");
     const randomMinutes = String(Math.floor(Math.random() * 60)).padStart(
@@ -58,9 +58,10 @@ function madMidnightClock() {
 
   setTimeout(() => {
     clearInterval(madInterval);
-    clockEl.textContent = "00:00";
-    hours = 0;
-    minutes = 0;
+    clearInterval(tick);
+    clockEl.textContent = "06:66";
+    hours = 6;
+    minutes = 66;
     seconds = 0;
   }, 5000);
 }
@@ -180,23 +181,32 @@ function extractUsername(sentence) {
 
 // A scary face message sent by the npc
 const scaryFace = function () {
-  chatMessages.innerHTML += `<div class="message blue-bg dark">
+  madClock();
+  setTimeout(() => {
+    horrorMetallicScreeches.play();
+    chatMessages.innerHTML += `<div class="message blue-bg dark">
   <div class="message-sender">Demon</div>
-  <div class="message-text"> <img src="images/scary-face.jpg" alt=""> YOU LOSE </div>
-  <div class="message-timestamp">10:30</div>
+  <div class="message-text"> <img src="images/scary-face.jpg" alt=""> </div>
+  <div class="message-timestamp">${hours}:${minutes}</div>
 </div>`;
-  chatMessages.innerHTML += `<div class="message blue-bg dark">
+    setTimeout(() => {
+      chatMessages.innerHTML += `<div class="message blue-bg dark">
   <div class="message-sender">Demon</div>
-  <div class="message-text"> I SEE YOU </div>
-  <div class="message-timestamp">10:30</div>
+  <div class="message-text"> GAME OVER </div>
+  <div class="message-timestamp">${hours}:${minutes}</div>
 </div>`;
+      chatMessages.lastElementChild.lastElementChild.scrollIntoView({
+        behavior: "smooth",
+      });
+    }, 100);
+  }, 6500);
 };
 
 const restartMessage = function () {
   chatMessages.innerHTML += `<div class="message blue-bg bright">
   <div class="message-sender">Developer</div>
   <div class="message-text"> Press "restart" to restart the game</div>
-  <div class="message-timestamp">10:30</div>
+  <div class="message-timestamp">${hours}:${minutes}</div>
 </div>`;
   chatMessages.lastElementChild.scrollIntoView({ behavior: "smooth" });
 };

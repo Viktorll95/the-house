@@ -27,6 +27,9 @@ const happyPop = document.querySelector("#happy-pop-2");
 happyPop.volume = 0.1;
 const ticTac = document.querySelector("#tic-tac");
 ticTac.volume = 0.3;
+const horrorMetallicScreeches = document.querySelector(
+  "#horror-metallic-screeches"
+);
 
 let playerName = "Player";
 let npcName = "Unknown";

@@ -42,8 +42,10 @@ let pizzaOrderedStr = "";
 const startStory = function () {
   // FIXME:FIXME:FIXME: Uncomment "pre.part1();" and comment out the other function
   // pre.part1();
-  npcName = "Anna";
-  a2F.part33();
+  ////////////////////
+  // npcName = "Anna";
+  // a2F.part33();
+  storyFailDemon.part1();
 };
 
 const askToRestart = function () {
@@ -390,7 +392,7 @@ const act1 = {
       fastForwardClock(`${hours}:${minutes + 2}`, act1.part5);
     } else {
       npcMessage("No answer, maybe we have to wait a minute or two...");
-      fastForwardClock(`${hours}:${minutes + 3}`, storyFail.part4f);
+      fastForwardClock(`${hours}:${minutes + 3}`, storyFail.part1);
     }
   },
 
@@ -916,7 +918,7 @@ const a2F = {
 
   part19e: function () {
     if (lastChoiceNum === 2) {
-      fastForwardClock(`${hours}:${minutes + 13}`, storyFail.part4h);
+      fastForwardClock(`${hours}:${minutes + 13}`, storyFail.part3);
     } else {
       npcMessage(`I guess I'll go back then`);
       npcMessageAndSetOptText(`Ugh, this doesn't feel good`, [
@@ -1252,54 +1254,104 @@ const act1NoF = {};
 
 ///////////////////////////////////////////////////////////////////
 const storyFail = {
-  part4f: function () {
-    npcMessage("Still no answer...", 2000);
-    npcMessageAndSetOptText(
-      "WAIT, I here something!",
-      ["Finally", "Okay, but be careful", "Nice"],
-      1000
-    );
-    setOpFn([storyFail.part4g, storyFail.part4g, storyFail.part4g]);
+  part1: function () {
+    storyFail.part2();
   },
-  part4g: function () {
+  part2: function () {
     btnOpHide();
-    fastForwardClock(`${hours}:${minutes + 3}`, storyFail.part4h);
+    fastForwardClock(`${hours}:${minutes + 3}`, storyFail.part3);
   },
-  part4h: function () {
+  part3: function () {
     btnOpHide();
-    setOpFn([storyFail.part4h1, storyFail.part4h1, storyFail.part4h1]);
+    setOpFn([storyFail.part4, storyFail.part4, storyFail.part4]);
     setTimeout(() => {
       btnOpShow([`${npcName}?`, `What's happening?`, "All good?"]);
     }, 3000);
   },
 
-  part4h1: function () {
+  part4: function () {
     btnOpHide();
-    setOpFn([storyFail.part4i, storyFail.part4i, storyFail.part4i]);
+    setOpFn([storyFail.part5, storyFail.part5, storyFail.part5]);
     setTimeout(() => {
-      btnOpShow([`${npcName}??`, `${npcName}, what's happening?`, "Hellooooo"]);
+      btnOpShow([
+        `${npcName}??`,
+        `${npcName}, "what's happening?`,
+        "Hellooooo",
+      ]);
     }, 7000);
   },
 
-  part4i: function () {
+  part5: function () {
     btnOpHide();
     setTimeout(() => {
-      fastForwardClock(`${hours}:${minutes + 6}`, storyFail.part4j);
+      fastForwardClock(`${hours}:${minutes + 6}`, storyFail.part6);
     }, 3000);
   },
 
-  part4j: function () {
+  part6: function () {
     btnOpHide();
-    setOpFn([storyFail.part4k, storyFail.part4k, storyFail.part4k]);
+    setOpFn([storyFail.part6, storyFail.part6, storyFail.part6]);
     btnOpShow([`${npcName} please answer!!`, `HELLO!?`, "What's going on!?"]);
   },
 
-  part4k: function () {
+  part6: function () {
     opt.func.length = 0;
-    fastForwardClock(`${hours}:${minutes + 3}`, storyFail.part4l);
+    fastForwardClock(`${hours}:${minutes + 3}`, storyFail.part7);
   },
-  part4l: function () {
+  part7: function () {
     btnOpHide();
     npcMessage(`You won't be hearing from ${npcName} anymore`);
+  },
+};
+
+//TODO: Continue with storyFailDemon
+const storyFailDemon = {
+  part1: function () {
+    btnOpHide();
+    fastForwardClock(`${hours}:${minutes + 3}`, storyFailDemon.part2);
+  },
+  part2: function () {
+    setOpFn([storyFailDemon.part3, storyFailDemon.part3, storyFailDemon.part3]);
+    setTimeout(() => {
+      btnOpShow([`${npcName}?`, `What's happening?`, "All good?"]);
+    }, 3000);
+  },
+  part3: function () {
+    fastForwardClock(`${hours}:${minutes + 3}`, storyFailDemon.part4);
+  },
+
+  part4: function () {
+    setOpFn([storyFailDemon.part5, storyFailDemon.part5, storyFailDemon.part5]);
+    setTimeout(() => {
+      btnOpShow([
+        `${npcName}??`,
+        `${npcName}, what's happening??`,
+        "Hellooooo",
+      ]);
+    }, 7000);
+  },
+
+  part5: function () {
+    setTimeout(() => {
+      fastForwardClock(`${hours}:${minutes + 6}`, storyFailDemon.part6);
+    }, 3000);
+  },
+
+  part6: function () {
+    setOpFn([storyFailDemon.part6, storyFailDemon.part6, storyFailDemon.part6]);
+    btnOpShow([
+      `${npcName.toUpperCase()} PLEASE ANSWER!!`,
+      `HELLO!?`,
+      "What's going on!?",
+    ]);
+  },
+
+  part6: function () {
+    opt.func.length = 0;
+    fastForwardClock(`${hours}:${minutes + 3}`, storyFailDemon.part7);
+  },
+  part7: function () {
+    btnOpHide();
+    scaryFace();
   },
 };

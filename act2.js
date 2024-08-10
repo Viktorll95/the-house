@@ -509,7 +509,7 @@ const a2F = {
         "Or shouldn't you burn it?",
         "Wait, just turn it back?",
       ]);
-      setOpFn([storyFailDemon, a2F.part37, storyFailDemon]);
+      setOpFn([storyFailDemon.part1, a2F.part37, storyFailDemon.part1]);
       setOpNpcCom([
         "😁",
         "Yes! Wasn't that what the rules said?",
@@ -523,7 +523,7 @@ const a2F = {
         "Maybe just say bye to Emily",
         "No, burn the painting",
       ]);
-      setOpFn([storyFailDemon, storyFailDemon, a2F.part37]);
+      setOpFn([storyFailDemon.part1, storyFailDemon.part1, a2F.part37]);
     }
   },
 
@@ -883,7 +883,7 @@ const a2NoF = {
       "Have you locked the doors?",
       "Oh, it's nothing",
     ]);
-    setOpFn([a2NoF.n36, a2NoF.n36, storyFailDemon]);
+    setOpFn([a2NoF.n36, a2NoF.n36, storyFailDemon.part1]);
     setOpNpcCom([undefined, undefined, "Oh, all right!"]);
   },
   n36: function () {
@@ -910,7 +910,7 @@ const a2NoF = {
         "Or shouldn't you burn it?",
         "Wait, just turn it back?",
       ]);
-      setOpFn([storyFailDemon, a2NoF.n37, storyFailDemon]);
+      setOpFn([storyFailDemon.part1, a2NoF.n37, storyFailDemon.part1]);
       setOpNpcCom([
         "😁",
         "Yes! Wasn't that what the rules said?",
@@ -924,7 +924,7 @@ const a2NoF = {
         "Maybe just say bye to Emily",
         "No, burn the painting",
       ]);
-      setOpFn([storyFailDemon, storyFailDemon, a2NoF.n37]);
+      setOpFn([storyFailDemon.part1, storyFailDemon.part1, a2NoF.n37]);
     }
   },
 

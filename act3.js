@@ -2,7 +2,6 @@
 
 const a3 = {
   p1: function () {
-    npcMessage("THE LIMIT HAS BEEN REACHED");
     npcMessageAndSetOptText(`${playerName}?`, [
       "Yeah",
       "Something happen?",
@@ -259,9 +258,219 @@ const a3 = {
         "Just continue watching the movie",
       ]
     );
-    setOpFn([a3.p18, a3.p18, a3.p18]);
+    setOpFn([a3.p18, a3.p18, storyFailDemon.part1]);
+    setOpNpcCom([undefined, undefined, "Okay... I just have to chill I guess"]);
   },
   p18: function () {
-    npcMessage("THE LIMIT HAS BEEN REACHED");
+    if (lastChoiceNum === 1) {
+      npcMessageAndSetOptText("Just checked, it's not there", [
+        "Just calmly leave",
+        "Continue searching the room",
+        "Just continue watching the movie",
+      ]);
+      setOpFn([a3.p18, storyFailDemon.part1, storyFailDemon.part1]);
+      setOpNpcCom([
+        undefined,
+        "All right, I'll try to find it",
+        "Okay... I just have to chill I guess",
+      ]);
+    } else {
+      npcMessage("Okay I will");
+      npcMessageAndSetOptText("This is starting to freaking me out", [
+        "Understandable, but take it easy",
+        "Just breathe and it will be fine",
+        "Because it is terrifying!!",
+      ]);
+      setOpFn([a3.p19, a3.p19, a3.p19]);
+    }
   },
+  p19: function () {
+    fastForwardClock(`${hour}:${minutes + 6}`, a3.p20);
+  },
+  p20: function () {
+    btnOpShow([`${npcName}?`, "All good?", "How's it going?"]);
+    setOpFn([a3.p20, a3.p20, a3.p20]);
+    setOpNpcCom(
+      [`${playerName}!`, "Yep all good", "Going well"],
+      "Just started watching the movie in another room"
+    );
+  },
+  p20: function () {
+    btnOpShow([
+      `Good, just checking`,
+      "Found the keys?",
+      "Anything more happen",
+    ]);
+    setOpFn([a3.p21, a3.p21, a3.p21]);
+    setOpNpcCom([
+      `That's nice of you 😊`,
+      "Nope, but haven't gotten back to check",
+      "No not yet, but I'm guessing there is more to come",
+    ]);
+  },
+  p21: function () {
+    fastForwardClock(`${hour}:${minutes + 59}`, a3.p22);
+  },
+  p22: function () {
+    npcMessage("What a movie! Almays good to see a classic");
+    npcMessage("I went back and found my keys as well!");
+    npcMessage("But there was a surprise");
+    npcMessageAndSetOptText("I found another note...", [
+      "Yes?",
+      "What does it say?",
+      "Aaaaand?",
+    ]);
+    setOpFn([a3.p23, a3.p23, a3.p23]);
+  },
+  p23: function () {
+    npcMessage(
+      `It says ‘If the police comes knocking after you burned a painting, you have to let them in.’`
+    );
+    npcMessage("Mhm");
+    npcMessageAndSetOptText("Oh...", ["?", "Yeah?", "What happened?"], 3000);
+    setOpFn([a3.p24, a3.p24, a3.p24]);
+  },
+  p24: function () {
+    npcMessage(`There was a knock on the door`);
+    npcMessage("Hold on...");
+    npcMessageAndSetOptText(
+      "It's the police",
+      ["Ask them why there here", , "What are they saying?", "Open the door!"],
+      8000
+    );
+    setOpFn([a3.p25, a3.p25, storyFailDemon.part1]);
+  },
+  p25: function () {
+    npcMessage(`There saying that they are investigating an arson`);
+    npcMessage("The say some neighbours have reported heavy smoke and fire");
+    npcMessageAndSetOptText("They have to come in and investigate", [
+      "Don't open the dooor",
+      "Tell them you are innocent",
+      "You have to open the door",
+    ]);
+    setOpFn([a3.p26, a3.p26, storyFailDemon.part1]);
+    setOpNpcCom([undefined, undefined, "Okay, I'll open the door"]);
+  },
+  p25: function () {
+    if (lastChoiceNum === 0) {
+      npcMessage("Okay");
+    }
+    if (lastChoiceNum === 0) {
+      npcMessage(
+        "Just told them, they say that they have to investigate anyway"
+      );
+    }
+    npcMessage(`They even say they've been in contact with Withaker`);
+    npcMessage("They know my name! Shit");
+    npcMessage(
+      "If I don't open the door I can be charged for obstructing justice and be sentenced"
+    );
+    npcMessageAndSetOptText("What should I do?", [
+      "Doesn't matter, DON'T OPEN",
+      "Maybe you have to open the door",
+      "Call Whitaker",
+    ]);
+    setOpNpcCom([undefined, "Okay, I'll open it", "No answer..."]);
+    setOpFn([a3.p26, storyFailDemon.part1, a3.p26]);
+  },
+  p26: function () {
+    npcMessageAndSetOptText(
+      "Last chance, they say, otherwise they will cave in the door",
+      ["Stay strong and don't open", "Barricace the door", "Open the door"],
+      5000
+    );
+    setOpNpcCom(["Okay", "I'll do that!", "Okay"]);
+    setOpFn([a3.p27, a3.p27, storyFailDemon.part1]);
+  },
+  p27: function () {
+    npcMessage("Holy sh*t, I think the door is gonna come in", 5000);
+    npcMessage("The outside of the entré must be completely destroyed");
+    npcMessageAndSetOptText("Whitaker is gonna be crazy mad ", [
+      "Not your problem",
+      "Don't mind and don't open!",
+      "Maybe you should open",
+    ]);
+    setOpNpcCom([
+      "I guess not, but it's gonna take some explaining",
+      "Okay",
+      "Okay, I'll open it",
+    ]);
+    setOpFn([a3.p28, storyFailDemon.part1, a3.p28]);
+  },
+  p27: function () {
+    npcMessage("Holy sh*t, I think the door is gonna come in", 5000);
+    npcMessage("The outside of the entré must be completely destroyed");
+    npcMessageAndSetOptText("Whitaker is gonna be crazy mad ", [
+      "Not your problem",
+      "Don't mind and don't open!",
+      "Maybe you should open",
+    ]);
+    setOpNpcCom([
+      "I guess not, but it's gonna take some explaining",
+      "Okay",
+      "Okay, I'll open it",
+    ]);
+    setOpFn([a3.p28, storyFailDemon.part1, a3.p28]);
+  },
+
+  p28: function () {
+    fastForwardClock(`${hour}:${minutes + 6}`, a3.p29);
+  },
+  p29: function () {
+    btnOpShow([
+      `${npcName}? All good?`,
+      "Is the police still there?",
+      "How's it going?",
+    ]);
+
+    setOpFn([a3.p30, a3.p30, a3.p30]);
+    setOpNpcCom(
+      [
+        "Well, not all good, but decent",
+        "I think so",
+        "Good and not good, at the same time",
+      ],
+      "They've stopped the worst of it, but I still hear noice outside the door, it's like something is outside but I don't know what"
+    );
+  },
+  p30: function () {
+    npcMessageAndSetOptText(
+      "But they are not charging at the door anymore and no one is talking to me",
+      ["Good that", "Stay strong", "Keep the door closed"]
+    );
+    setOpFn([a3.p31, a3.p31, a3.p31]);
+    setOpNpcCom([
+      "Yes, still creepy but better than before",
+      "Thanks! I'll try!",
+      "I will, thanks",
+    ]);
+  },
+  p31: function () {
+    fastForwardClock(`${6}:${0}`, success.s1);
+  },
+  p32: function () {},
+};
+
+success = {
+  s1: function () {
+    npcMessage("I think... I made it troughtout the night");
+    npcMessage("I'm going to open the main door");
+    npcMessage("Huh it just opened", 5000);
+    npcMessage("There is no signs of wear, not even a dent");
+    npcMessage("Even the ashes from the burnt painting is gone");
+    npcMessage("I think I've done it");
+    npcMessage("With your help");
+    npcMessageAndSetOptText(
+      "Thanks you so much! I don't think I could've done it without you",
+      ["You're welcome!", "Glad you're well", "Now, cut contact with Whitaker"]
+    );
+    setOpFn([success.s2, success.s2, success.s2]);
+    setOpNpcCom([
+      "😄😄😄",
+      "Thanks to you 🤗",
+      "Yeah haha, this is my last job from him 😅",
+    ]);
+  },
+
+  s2: function () {},
 };

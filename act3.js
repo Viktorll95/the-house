@@ -32,7 +32,7 @@ const a3 = {
       `He says that ${pizzaOrderedStr} was ordered to this adress`,
       [`Nice! Finally!`, `Give him a scolding`, `Don't open the door`]
     );
-    setOpFn([storyFailDemon.part1, storyFailDemon.part1, a3.p4]);
+    setOpFn([a3.p3Fail, a3.p3Fail, a3.p4]);
     setOpNpcCom(
       [
         "Yeah, finally some sweet pizza",

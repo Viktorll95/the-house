@@ -210,3 +210,24 @@ const restartMessage = function () {
 </div>`;
   chatMessages.lastElementChild.scrollIntoView({ behavior: "smooth" });
 };
+
+const brightMessage = function (text, sender = "Developer", delay = 0) {
+  chatMessages.innerHTML += `<div class="message blue-bg bright">
+  <div class="message-sender">${sender}</div>
+  <div class="message-text"> ${text}</div>
+  <div class="message-timestamp">${hours}:${minutes}</div>
+</div>`;
+  chatMessages.lastElementChild.scrollIntoView({ behavior: "smooth" });
+};
+
+const endGameSucces = function () {
+  tada.play();
+  brightMessage(
+    `Congratulations! You made it to the end of the game and ${npcName} survived!`
+  );
+
+  brightMessage(`Press "Play again" if you want to play again`);
+
+  btnOpShow(["Play again", "Play again", "Play again"]);
+  setOpFn([restartGame, restartGame, restartGame]);
+};

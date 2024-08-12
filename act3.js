@@ -472,5 +472,9 @@ success = {
     ]);
   },
 
-  s2: function () {},
+  s2: function () {
+    setTimeout(() => {
+      endGameSucces();
+    }, 1500);
+  },
 };

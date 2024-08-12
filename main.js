@@ -30,6 +30,8 @@ ticTac.volume = 0.3;
 const horrorMetallicScreeches = document.querySelector(
   "#horror-metallic-screeches"
 );
+const tada = document.querySelector("#tada");
+tada.volume = 0.3;
 
 let playerName = "Player";
 let npcName = "Unknown";

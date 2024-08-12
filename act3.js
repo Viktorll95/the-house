@@ -474,7 +474,7 @@ success = {
 
   s2: function () {
     setTimeout(() => {
-      endGameSucces();
+      endGameSuccess();
     }, 1500);
   },
 };

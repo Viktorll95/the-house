@@ -719,6 +719,10 @@ const storyFail = {
   part7: function () {
     btnOpHide();
     npcMessage(`You won't be hearing from ${npcName} anymore`);
+
+    setTimeout(() => {
+      endGameFail();
+    }, 7000);
   },
 };
 
@@ -771,5 +775,9 @@ const storyFailDemon = {
   part7: function () {
     btnOpHide();
     scaryFace();
+
+    setTimeout(() => {
+      endGameFail();
+    }, 7000);
   },
 };

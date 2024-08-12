@@ -220,13 +220,26 @@ const brightMessage = function (text, sender = "Developer", delay = 0) {
   chatMessages.lastElementChild.scrollIntoView({ behavior: "smooth" });
 };
 
-const endGameSucces = function () {
+const endGameSuccess = function () {
   tada.play();
   brightMessage(
     `Congratulations! You made it to the end of the game and ${npcName} survived!`
   );
 
   brightMessage(`Press "Play again" if you want to play again`);
+
+  btnOpShow(["Play again", "Play again", "Play again"]);
+  setOpFn([restartGame, restartGame, restartGame]);
+};
+
+const endGameFail = function () {
+  brightMessage(
+    `Unfortunately you lost, and you won't know what happened to ${npcName}`
+  );
+
+  brightMessage(
+    `Consider the choices you made and press "Play again" if you want to give it another try`
+  );
 
   btnOpShow(["Play again", "Play again", "Play again"]);
   setOpFn([restartGame, restartGame, restartGame]);

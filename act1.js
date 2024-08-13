@@ -289,11 +289,12 @@ const act1 = {
   part4pre: function () {
     if (hours > 19) {
       npcMessage("I'll text you tomorrow when I'm at the house!");
+      npcMessage("It will be around 19");
     } else if (hours < 19 && hours >= 17) {
       npcMessage("I'm actually there soon, text you in a bit!");
     } else if (hours < 17 && hours > 12) {
       npcMessage(
-        "I'll be there this eevening at around 19. I'll text you when I'm there"
+        "I'll be there this evening at around 19. I'll text you when I'm there"
       );
     } else if (hours < 6) {
       npcMessage(

@@ -1,33 +1,7 @@
 "use strict";
 
 // Variable that holds the rules, so they won't have to be written again
-const rules = `Dear ${npcName},
-<br>
-<br>
-Thank you for taking on this overnight task. As always, your safety and the security of the house are of utmost importance. Please adhere strictly to the following rules:
-<br>
-<br>
-1. Close all windows and doors before midnight (00:00).
-<br>
-2. Do not, under any circumstances, open the door or windows between 00:00 and 06:00.
-<br>
-3. If your things aren’t where you left them, calmly leave the room, and when you return, they should be back.
-<br>
-  4. If any of the paintings are upside down, burn them immediately.
-  <br>
-  5. Do not turn on the radio, if it turns on by itself, turn it off.
-  <br>
-  6. If you find notes with more rules, follow them, if they are signed by me "Mr. Whitaker", otherwise, don't follow them.
-  <br>
-  <br>
-  Remember, follow these rules exactly as they are. Your safety depends on it.
-  <br>
-  Thank you for your diligence and discretion. I trust you will find everything in order.
-  <br>
-  <br>
-  Best regards,
-  <br>
-  Mr. Whitaker`;
+let rules;
 // Variable that keeps track if the player has read the rules
 let hasReadRules = false;
 let isHungry = true;
@@ -60,8 +34,36 @@ const askToRestart = function () {
 const pre = {
   part1: function () {
     npcName = "Anna";
+    // The "rules" variable needs to be set after the npc is given a name
+    rules = `Dear ${npcName},
+<br>
+<br>
+Thank you for taking on this overnight task. As always, your safety and the security of the house are of utmost importance. Please adhere strictly to the following rules:
+<br>
+<br>
+1. Close all windows and doors before midnight (00:00).
+<br>
+2. Do not, under any circumstances, open the door or windows between 00:00 and 06:00.
+<br>
+3. If your things aren’t where you left them, calmly leave the room, and when you return, they should be back.
+<br>
+  4. If any of the paintings are upside down, burn them immediately.
+  <br>
+  5. Do not turn on the radio, if it turns on by itself, turn it off.
+  <br>
+  6. If you find notes with more rules, follow them, if they are signed by me "Mr. Whitaker", otherwise, don't follow them.
+  <br>
+  <br>
+  Remember, follow these rules exactly as they are. Your safety depends on it.
+  <br>
+  Thank you for your diligence and discretion. I trust you will find everything in order.
+  <br>
+  <br>
+  Best regards,
+  <br>
+  Mr. Whitaker`;
     npcMessage(
-      `Okay ${npcName}, so this is going to sound wierd but I'll just go for it`
+      `Okay ${playerName}, so this is going to sound wierd but I'll just go for it`
     );
     npcMessage(
       "Just to start, I'm a poor-ish young girl (student-life yay) and I found this job but I would like some advice, okay?"
@@ -171,7 +173,7 @@ const pre = {
       `This time I’m actually going to pick up the keys from one of Whitakers… Friends? Anyway I got some weird rules as per usual`
     );
     npcMessageAndSetOptText(
-      `When I pull up on the driveway, I have to honk one time, wait in the car for four minutes and knock on the door eight times.`,
+      `When I pull up on the driveway, I need to follow specific rules, I'm gonna tell you them later and then you need to help me with them. Okay?`,
       ["Got it", "Are you gonna do it?", "Seems stupid this"]
     ),
       setOpFn([pre.part7, pre.part7, pre.part7]),
@@ -269,7 +271,7 @@ const act1 = {
       "The place itself is an old, kind of creepy house on the outskirts of town."
     );
     npcMessageAndSetOptText(
-      "The owner, Mr. Whitaker told me to pull up by his sons house, honk the horn one time, wait for four minutes and then go to the front door and knock eight times.",
+      "The owner, Mr. Whitaker told me to pull up by his friends house, honk the horn one time, wait for four minutes and then go to the front door and knock eight times.",
       [
         "A bit weird but okay",
         "Just do it, it will be fine",
@@ -391,6 +393,7 @@ const act1 = {
       : (act1.succes = false);
     if (act1.succes) {
       npcMessage("Someone is coming towards the door!");
+      npcMessage('Probably Whitakers "friend"');
       npcMessage("Whoever it is, is enormous. The ground here almost quakes");
       // Maybe insert a picture of a huge guy in doorway?
       npcMessage("He's at the door, hold on...");
@@ -574,11 +577,15 @@ const act1 = {
       4000,
       500
     );
-    npcMessageAndSetOptText(`That's all it says`, [
-      "So the food is fine to eat",
-      `So don't eat the food`,
-      hasReadRules ? `Thanks` : `Maybe we should have read the rules...`,
-    ]);
+    npcMessage(`That's all it says`);
+    npcMessageAndSetOptText(
+      `So I'm pretty much starving, do you think the food is fine to eat?`,
+      [
+        "The food is fine to eat",
+        `Don't eat the food`,
+        hasReadRules ? `Thanks` : `Maybe we should have read the rules...`,
+      ]
+    );
     setOpFn([act1.part10a1, act1.part10a2, act1.part9b]);
     setOpNpcCom([
       `Right? Since the note is signed by Whitaker`,

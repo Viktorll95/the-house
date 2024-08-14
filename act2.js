@@ -83,7 +83,7 @@ const a2F = {
       case 2:
         pizzaOrderedStr = "capricciosa and pineapple pizza";
     }
-    npcMessageAndSetOptText(`Emily ordered a pinaepple pizza!`, [
+    npcMessageAndSetOptText(`Emily ordered a pineapple pizza!`, [
       `Oh that's nasty 😅`,
       `I actually like those`,
       `Who cares`,
@@ -167,13 +167,13 @@ const a2F = {
   part17: function () {
     npcMessageAndSetOptText(
       "Emily is actually thinking of going to a store to get some more snacks",
-      ["Sounds good", "Now? Ar this hour?", "Tell her to not do it"]
+      ["Sounds good", "Now? At this hour?", "Tell her to not do it"]
     );
     setOpFn([a2F.part17b, a2F.part17b, a2F.part17b]);
     setOpNpcCom(
       [
         "Yep!",
-        "Haha yeah, I coulnd't stop her even if I tried",
+        "Haha yeah, I couldn't stop her even if I tried",
         "She actually already went. It's impossible to stop that girl when she has an idea",
       ],
       "She said it will take her about 20 minutes"
@@ -533,7 +533,7 @@ const a2F = {
     fastForwardClock(`${hours}:${minutes + 5}`, a2F.part38);
   },
   part38: function () {
-    npcMessage("I never thought I woul'd be doing this...");
+    npcMessage("I never thought I would be doing this...");
     npcMessage(`<img src="images/burning-painting.png" alt="">`);
     npcMessage(`Hope Whitaker doesn't get mad...`, 0, 0);
     npcMessageAndSetOptText(

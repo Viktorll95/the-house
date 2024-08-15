@@ -15,10 +15,10 @@ let pizzaOrderedStr = "";
 
 const startStory = function () {
   // FIXME:FIXME:FIXME: Uncomment "pre.part1();" and comment out the other function
-  pre.part1();
+  // pre.part1();
   ////////////////////
-  // npcName = "Anna";
-  // a3.p1();
+  npcName = "Anna";
+  a3.p1();
   // a2F.part33();
   // a2End.a2EndPart();
   // storyFailDemon.part1();
@@ -310,8 +310,6 @@ const act1 = {
   },
 
   part4: function () {
-    /*TODO: (<-- Just a highlighter) The following function makes the player lose if the clock has reached 00:00 without the player making certain coices 08/08*/
-    clockStrokeTrigger("00:00", scaryFace);
     npcMessage("Okay there we go... What a wierd house"); //TODO: Maybe insert a picture of a house?
     npcMessage(
       "So we where suppose to honk right. Hope the police is not around haha 😅"
@@ -485,6 +483,8 @@ const act1 = {
   },
 
   part6: function () {
+    /*TODO: (<-- Just a highlighter) The following function makes the player lose if the clock has reached 00:00 without the player making certain coices 08/08*/
+    clockStrokeTrigger("00:00", scaryFace);
     npcMessage("All right, here we are.");
     npcMessage("Ugh I'm a bit hungry, should've stopped for some food");
     npcMessage("Anyway, I'm at the place");

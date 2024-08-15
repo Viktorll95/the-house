@@ -66,7 +66,7 @@ const a3 = {
       "Just kidding, open it!",
     ]);
     setOpFn([a3.p5, a3.p5, storyFailDemon.part1]);
-    setOpFn([
+    setOpNpcCom([
       "Okay, I mean this whole thing is creepy but I trust you",
       "Something about not letting someone in after 00:00?",
       "I'll open it!",
@@ -80,14 +80,13 @@ const a3 = {
       "Go do something else then",
     ]);
     setOpFn([a3.p7, a3.p6, a3.p7]);
-    setOpNpcCom([
-      "All right, I will",
-      "He said 'no' and repeated this exact adress with the pizzas we ordered",
-      "I'll try, thanks",
-    ]);
+    setOpNpcCom(["All right, I will", undefined, "I'll try, thanks"]);
   },
 
   p6: function () {
+    npcMessage(
+      `He said 'no' and repeated this exact adress with the pizzas we ordered`
+    );
     btnOpShow([
       "Tell him to just leave then",
       "Just ignore him",

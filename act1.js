@@ -15,10 +15,10 @@ let pizzaOrderedStr = "";
 
 const startStory = function () {
   // FIXME:FIXME:FIXME: Uncomment "pre.part1();" and comment out the other function
-  // pre.part1();
+  pre.part1();
   ////////////////////
-  npcName = "Anna";
-  a3.p1();
+  // npcName = "Anna";
+  // a3.p1();
   // a2F.part33();
   // a2End.a2EndPart();
   // storyFailDemon.part1();

@@ -97,7 +97,7 @@ const a3 = {
   },
 
   p7: function () {
-    fastForwardClock(`${hour}:${minutes + 6}`, a3.p8);
+    fastForwardClock(`${hours}:${minutes + 6}`, a3.p8);
   },
   p8: function () {
     npcMessageAndSetOptText(
@@ -413,7 +413,8 @@ const a3 = {
   },
 
   p28: function () {
-    fastForwardClock(`${hour}:${minutes + 6}`, a3.p29);
+    console.log(hours);
+    fastForwardClock(`${hours}:${minutes + 6}`, a3.p29);
   },
   p29: function () {
     btnOpShow([
@@ -450,7 +451,7 @@ const a3 = {
   p32: function () {},
 };
 
-success = {
+const success = {
   s1: function () {
     npcMessage("I think... I made it troughtout the night");
     npcMessage("I'm going to open the main door");

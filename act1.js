@@ -1,13 +1,27 @@
 "use strict";
 
+// Variable that holds the rules, so they won't have to be written again
+let rules;
+// Variable that keeps track if the player has read the rules
+let hasReadRules = false;
+let isHungry = true;
+let likesPlayer = 0;
+let isPissed = false;
+let orderedPizza = false;
+let pizzaOrderedStr = "";
+
 /////////////////////////////
 // The game itself:
 
 const startStory = function () {
   // FIXME:FIXME:FIXME: Uncomment "pre.part1();" and comment out the other function
   pre.part1();
+  ////////////////////
   // npcName = "Anna";
-  // story.part11();
+  // a3.p1();
+  // a2F.part33();
+  // a2End.a2EndPart();
+  // storyFailDemon.part1();
 };
 
 const askToRestart = function () {
@@ -20,8 +34,36 @@ const askToRestart = function () {
 const pre = {
   part1: function () {
     npcName = "Anna";
+    // The "rules" variable needs to be set after the npc is given a name
+    rules = `Dear ${npcName},
+<br>
+<br>
+Thank you for taking on this overnight task. As always, your safety and the security of the house are of utmost importance. Please adhere strictly to the following rules:
+<br>
+<br>
+1. Close all windows and doors before midnight (00:00).
+<br>
+2. Do not, under any circumstances, open the door or windows between 00:00 and 06:00.
+<br>
+3. If your things aren’t where you left them, calmly leave the room, and when you return, they should be back.
+<br>
+  4. If any of the paintings are upside down, burn them immediately.
+  <br>
+  5. Do not turn on the radio, if it turns on by itself, turn it off.
+  <br>
+  6. If you find notes with more rules, follow them, if they are signed by me "Mr. Whitaker", otherwise, don't follow them.
+  <br>
+  <br>
+  Remember, follow these rules exactly as they are. Your safety depends on it.
+  <br>
+  Thank you for your diligence and discretion. I trust you will find everything in order.
+  <br>
+  <br>
+  Best regards,
+  <br>
+  Mr. Whitaker`;
     npcMessage(
-      `Okay ${npcName}, so this is going to sound wierd but I'll just go for it`
+      `Okay ${playerName}, so this is going to sound wierd but I'll just go for it`
     );
     npcMessage(
       "Just to start, I'm a poor-ish young girl (student-life yay) and I found this job but I would like some advice, okay?"
@@ -131,7 +173,7 @@ const pre = {
       `This time I’m actually going to pick up the keys from one of Whitakers… Friends? Anyway I got some weird rules as per usual`
     );
     npcMessageAndSetOptText(
-      `When I pull up on the driveway, I have to honk one time, wait in the car for four minutes and knock on the door eight times.`,
+      `When I pull up on the driveway, I need to follow specific rules, I'm gonna tell you them later and then you need to help me with them. Okay?`,
       ["Got it", "Are you gonna do it?", "Seems stupid this"]
     ),
       setOpFn([pre.part7, pre.part7, pre.part7]),
@@ -229,7 +271,7 @@ const act1 = {
       "The place itself is an old, kind of creepy house on the outskirts of town."
     );
     npcMessageAndSetOptText(
-      "The owner, Mr. Whitaker told me to pull up by his sons house, honk the horn one time, wait for four minutes and then go to the front door and knock eight times.",
+      "The owner, Mr. Whitaker told me to pull up by his friends house, honk the horn one time, wait for four minutes and then go to the front door and knock eight times.",
       [
         "A bit weird but okay",
         "Just do it, it will be fine",
@@ -249,21 +291,22 @@ const act1 = {
   part4pre: function () {
     if (hours > 19) {
       npcMessage("I'll text you tomorrow when I'm at the house!");
+      npcMessage("It will be around 19");
     } else if (hours < 19 && hours >= 17) {
       npcMessage("I'm actually there soon, text you in a bit!");
     } else if (hours < 17 && hours > 12) {
       npcMessage(
-        "I'll be there this eevening at around 18. I'll text you when I'm there"
+        "I'll be there this evening at around 19. I'll text you when I'm there"
       );
     } else if (hours < 6) {
       npcMessage(
-        "Sorry for keeping you up at this hour. I'll text you at about 18 when I'm picking up the keys"
+        "Sorry for keeping you up at this hour. I'll text you at about 19 when I'm picking up the keys"
       );
     } else {
-      npcMessage("I'll text you at about 18 when I'm picking up the keys");
+      npcMessage("I'll text you at about 19 when I'm picking up the keys");
     }
     npcMessage("😉");
-    fastForwardClock("18:23", act1.part4);
+    fastForwardClock("19:03", act1.part4);
   },
 
   part4: function () {
@@ -292,7 +335,7 @@ const act1 = {
         "Wait nine minutes in the car",
       ]
     );
-    //FIXME:FIXME:FIXME:FIXME:FIXME: If one of the functions doesn't work. Does that mean no the function will be the previous function??
+
     setOpFn([act1.part4c, act1.part4c, act1.part4c]);
     setOpNpcCom([
       "No time to waste!",
@@ -348,13 +391,14 @@ const act1 = {
       : (act1.succes = false);
     if (act1.succes) {
       npcMessage("Someone is coming towards the door!");
+      npcMessage('Probably Whitakers "friend"');
       npcMessage("Whoever it is, is enormous. The ground here almost quakes");
       // Maybe insert a picture of a huge guy in doorway?
       npcMessage("He's at the door, hold on...");
       fastForwardClock(`${hours}:${minutes + 2}`, act1.part5);
     } else {
       npcMessage("No answer, maybe we have to wait a minute or two...");
-      fastForwardClock(`${hours}:${minutes + 3}`, storyFail.part4f);
+      fastForwardClock(`${hours}:${minutes + 3}`, storyFail.part1);
     }
   },
 
@@ -411,40 +455,11 @@ const act1 = {
     ]);
   },
 
-  // Part5c down below:
-  // Variable that keeps track if the player has read the rules
-  hasReadRules: false,
-  // Variable that holds the rules, so they won't have to be written again
-  rules: `Dear ${npcName},
-    <br>
-    <br>
-    Thank you for taking on this overnight task. As always, your safety and the security of the house are of utmost importance. Please adhere strictly to the following rules:
-    <br>
-    <br>
-    1. Close all windows and doors before midnight (00:00).
-    <br>
-    2. Do not, under any circumstances, open the door or windows between 00:00 and 06:00.
-    <br>
-    3. If your things aren’t where you left them, calmly leave the room, and when you return, they should be back.
-    <br>
-    4. If any of the paintings are upside down, burn them immediately.
-    <br>
-    5. If you find notes with more rules, follow them, if they are signed by me "Mr. Whitaker", otherwise, don't follow them.
-    <br>
-    <br>
-    Remember, follow these rules exactly as they are. Your safety depends on it.
-    <br>
-    Thank you for your diligence and discretion. I trust you will find everything in order.
-    <br>
-    <br>
-    Best regards,
-    <br>
-    Mr. Whitaker`,
   part5c: function () {
     npcMessage(
       "It's from Whitaker all right. Hold on, I'll scan in with my camera"
     );
-    npcMessage(act1.rules, 4000, 500);
+    npcMessage(rules, 4000, 500);
     npcMessageAndSetOptText(`Well, that's that`, [
       "Okay, I'll try to remember them",
       "Spooky",
@@ -459,27 +474,32 @@ const act1 = {
       ],
       "It has actually always been fine, and as said, I have always followed the rules"
     );
-    act1.hasReadRules = true;
+    hasReadRules = true;
   },
 
   part5d: function () {
-    npcMessage(
-      "I'll get back to you in about half an hour when I'm at the house"
-    );
-    fastForwardClock(`${hours}:${minutes + 29}`, act1.part6);
+    npcMessage("I'll get back to you in about an hour when I'm at the house");
+    fastForwardClock(`${19}:${46}`, act1.part6);
   },
 
   part6: function () {
+    /*TODO: (<-- Just a highlighter) The following function makes the player lose if the clock has reached 00:00 without the player making certain coices 08/08*/
+    clockStrokeTrigger("00:00", scaryFace);
     npcMessage("All right, here we are.");
     npcMessage("Ugh I'm a bit hungry, should've stopped for some food");
     npcMessage("Anyway, I'm at the place");
     npcMessage("Imma send you a pic!");
-    npcMessage("What do you think?");
-    npcMessageAndSetOptText(`<img src="images/house.png" alt=""> The house! `, [
-      "Be careful!",
-      "Wouldn't enter it for even a million €",
-      "Looks great, easy money!",
-    ]);
+    npcMessage(`<img src="images/house.png" alt="">`);
+    npcMessageAndSetOptText(
+      `What do you think?`,
+      [
+        "Be careful!",
+        "Wouldn't enter it for even a million €",
+        "Looks great, easy money!",
+      ],
+      0,
+      0
+    );
     setOpFn([act1.part6b, act1.part6b, act1.part6b]),
       setOpNpcCom([
         "I will",
@@ -557,16 +577,20 @@ const act1 = {
       4000,
       500
     );
-    npcMessageAndSetOptText(`That's all it says`, [
-      "So the food is fine to eat",
-      `So don't eat the food`,
-      act1.hasReadRules ? `Thanks` : `Maybe we should have read the rules...`,
-    ]);
+    npcMessage(`That's all it says`);
+    npcMessageAndSetOptText(
+      `So I'm pretty much starving, do you think the food is fine to eat?`,
+      [
+        "The food is fine to eat",
+        `Don't eat the food`,
+        hasReadRules ? `Thanks` : `Maybe we should have read the rules...`,
+      ]
+    );
     setOpFn([act1.part10a1, act1.part10a2, act1.part9b]);
     setOpNpcCom([
       `Right? Since the note is signed by Whitaker`,
       `Maybe that's for the best, even thought I'm quite hungry`,
-      act1.hasReadRules
+      hasReadRules
         ? "I'm the one who should thank you for the help!"
         : "Yes, but lucky for us (or me) I kept the note",
     ]);
@@ -582,8 +606,8 @@ const act1 = {
   },
 
   part9c: function () {
-    act1.hasReadRules = true;
-    npcMessage(act1.rules, 4000);
+    hasReadRules = true;
+    npcMessage(rules, 4000);
     npcMessageAndSetOptText("So do you think the food is safe?", [
       "So you can eat the food",
       "So don't eat the food",
@@ -599,7 +623,7 @@ const act1 = {
 
   part10a1: function () {
     npcMessage("Nice, hold on one sec...");
-    act1.isHungry = false;
+    isHungry = false;
     npcMessage("That's alot better", 5000);
     npcMessageAndSetOptText("So I was thinking...", [
       "Yeah?",
@@ -641,77 +665,127 @@ const act1 = {
     npcMessageAndSetOptText("What do you think?", [
       "Yes, sure if you feel like it!",
       `Maybe it's better to not do that`,
-      act1.hasReadRules
-        ? `Sure! Just remember the rules`
-        : `No, it's a dumb idea`,
+      hasReadRules ? `Sure! Just remember the rules` : `No, it's a dumb idea`,
     ]);
-    setOpFn([act1.part12, act1.part12, act1.part12]);
+    setOpFn([a2F.part12, a2NoF.n12, hasReadRules ? a2F.part12 : a2NoF.n12]);
     setOpNpcCom([
       "I deff do!",
       "Yeah maybe, better not risk anything...",
-      act1.hasReadRules
+      hasReadRules
         ? `Yep, and as you know, it's allowed :D (until 00:00 ofc!)`
         : `...Okay, thx for the response sunshine`,
     ]);
-  },
-  part12alt1: function () {
-    npcMessageAndSetOptText("THE LIMIT HAS BEEN REACHED");
-  },
-  part12alt2: function () {
-    npcMessage("THE LIMIT HAS BEEN REACHED");
   },
 };
 
 ///////////////////////////////////////////////////////////////////
 const storyFail = {
-  part4f: function () {
-    npcMessage("Still no answer...", 2000);
-    npcMessageAndSetOptText(
-      "WAIT, I here something!",
-      ["Finally", "Okay, but be careful", "Nice"],
-      1000
-    );
-    setOpFn([storyFail.part4g, storyFail.part4g, storyFail.part4g]);
+  part1: function () {
+    storyFail.part2();
   },
-  part4g: function () {
+  part2: function () {
     btnOpHide();
-    fastForwardClock(`${hours}:${minutes + 3}`, storyFail.part4h);
+    fastForwardClock(`${hours}:${minutes + 3}`, storyFail.part3);
   },
-  part4h: function () {
+  part3: function () {
     btnOpHide();
-    setOpFn([storyFail.part4h1, storyFail.part4h1, storyFail.part4h1]);
+    setOpFn([storyFail.part4, storyFail.part4, storyFail.part4]);
     setTimeout(() => {
       btnOpShow([`${npcName}?`, `What's happening?`, "All good?"]);
     }, 3000);
   },
 
-  part4h1: function () {
+  part4: function () {
     btnOpHide();
-    setOpFn([storyFail.part4i, storyFail.part4i, storyFail.part4i]);
+    setOpFn([storyFail.part5, storyFail.part5, storyFail.part5]);
     setTimeout(() => {
-      btnOpShow([`${npcName}??`, `${npcName}, what's happening?`, "Hellooooo"]);
+      btnOpShow([
+        `${npcName}??`,
+        `${npcName}, "what's happening?`,
+        "Hellooooo",
+      ]);
     }, 7000);
   },
 
-  part4i: function () {
+  part5: function () {
     btnOpHide();
     setTimeout(() => {
-      fastForwardClock(`${hours}:${minutes + 6}`, storyFail.part4j);
+      fastForwardClock(`${hours}:${minutes + 6}`, storyFail.part6);
     }, 3000);
   },
 
-  part4j: function () {
+  part6: function () {
     btnOpHide();
-    setOpFn([storyFail.part4k, storyFail.part4k, storyFail.part4k]);
+    setOpFn([storyFail.part6, storyFail.part6, storyFail.part6]);
     btnOpShow([`${npcName} please answer!!`, `HELLO!?`, "What's going on!?"]);
   },
 
-  part4k: function () {
+  part6: function () {
     opt.func.length = 0;
-    fastForwardClock(`${hours}:${minutes + 3}`, storyFail.part4l);
+    fastForwardClock(`${hours}:${minutes + 3}`, storyFail.part7);
   },
-  part4l: function () {
+  part7: function () {
     btnOpHide();
     npcMessage(`You won't be hearing from ${npcName} anymore`);
+
+    setTimeout(() => {
+      endGameFail();
+    }, 7000);
+  },
+};
+
+//TODO: Continue with storyFailDemon
+const storyFailDemon = {
+  part1: function () {
+    btnOpHide();
+    fastForwardClock(`${hours}:${minutes + 3}`, storyFailDemon.part2);
+  },
+  part2: function () {
+    setOpFn([storyFailDemon.part3, storyFailDemon.part3, storyFailDemon.part3]);
+    setTimeout(() => {
+      btnOpShow([`${npcName}?`, `What's happening?`, "All good?"]);
+    }, 3000);
+  },
+  part3: function () {
+    fastForwardClock(`${hours}:${minutes + 3}`, storyFailDemon.part4);
+  },
+
+  part4: function () {
+    setOpFn([storyFailDemon.part5, storyFailDemon.part5, storyFailDemon.part5]);
+    setTimeout(() => {
+      btnOpShow([
+        `${npcName}??`,
+        `${npcName}, what's happening??`,
+        "Hellooooo",
+      ]);
+    }, 7000);
+  },
+
+  part5: function () {
+    setTimeout(() => {
+      fastForwardClock(`${hours}:${minutes + 6}`, storyFailDemon.part6);
+    }, 3000);
+  },
+
+  part6: function () {
+    setOpFn([storyFailDemon.part6, storyFailDemon.part6, storyFailDemon.part6]);
+    btnOpShow([
+      `${npcName.toUpperCase()} PLEASE ANSWER!!`,
+      `HELLO!?`,
+      "What's going on!?",
+    ]);
+  },
+
+  part6: function () {
+    opt.func.length = 0;
+    fastForwardClock(`${hours}:${minutes + 3}`, storyFailDemon.part7);
+  },
+  part7: function () {
+    btnOpHide();
+    scaryFace();
+
+    setTimeout(() => {
+      endGameFail();
+    }, 7000);
   },
 };

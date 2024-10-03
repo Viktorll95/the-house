@@ -12,6 +12,7 @@ const option0El = document.querySelector("#option0");
 const option1El = document.querySelector("#option1");
 const option2El = document.querySelector("#option2");
 const btnOptionList = document.querySelectorAll(".btn-option");
+let lastChoiceNum;
 
 const chatHeaderName = document.querySelector(".chat-header-name");
 const chatMessages = document.querySelector(".chat-messages");
@@ -26,6 +27,11 @@ const happyPop = document.querySelector("#happy-pop-2");
 happyPop.volume = 0.1;
 const ticTac = document.querySelector("#tic-tac");
 ticTac.volume = 0.3;
+const horrorMetallicScreeches = document.querySelector(
+  "#horror-metallic-screeches"
+);
+const tada = document.querySelector("#tada");
+tada.volume = 0.3;
 
 let playerName = "Player";
 let npcName = "Unknown";
@@ -90,7 +96,7 @@ const npcMessage = (
 
   ///////////////////////////////////////////////////////////
   //FIXME:FIXME:FIXME: THIS PIECE OF CODE IS USED FOR DEVELOPMENT. TO SEND THE NPC TEXT WITHOUT ANY DELAY
-  currTextDelayTotal = textingDelay = 0;
+  // currTextDelayTotal = textingDelay = 0;
   ////////////////////////////////////////////////////////
 
   setTimeout(() => {
@@ -212,13 +218,15 @@ const commentAfterOption = function () {
 btnOptionList.forEach((btnOption, i) =>
   btnOption.addEventListener("click", (e) => {
     e.preventDefault();
-    if (npcTextsInProgress === 0) {
+    if (npcTextsInProgress === 0 && currTextDelayTotal === 0) {
       happyPop.play();
       sendMessage(btnOption.textContent, playerName, btnOption.id);
       opt.userChoice.forEach((userChoice, i) => {
         opt.userChoice[i] = false;
+        lastChoiceNum = undefined;
       });
       opt.userChoice[i] = true;
+      lastChoiceNum = i;
       if (opt.comment[i]) npcMessage(opt.comment[i]);
       opt.comment.length = 0;
       commentAfterOption();

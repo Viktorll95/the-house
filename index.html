@@ -4,9 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="chat_app_vanilla_js.css" />
-    <title>Chat app</title>
+    <link rel="stylesheet" href="modal-style.css" />
+    <title>The house</title>
   </head>
   <body>
+    <!-- Modal structure -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3 id="modalText">How fast should £{NpcName} type?</h3>
+        <!-- Text will be set dynamically -->
+
+        <!-- Buttons for speed selection -->
+        <div class="speed-options">
+          <button id="rapidBtn">Rapid</button>
+          <button id="fastBtn">Fast</button>
+          <button id="normalBtn">Normal</button>
+        </div>
+      </div>
+    </div>
+    <!--  -->
     <div class="chat-container">
       <div class="chat-header">
         <h2 class="chat-header-name">Unknown</h2>
@@ -64,5 +81,6 @@
     <script src="act1.js"></script>
     <script src="act2.js"></script>
     <script src="act3.js"></script>
+    <script src="modal-script.js"></script>
   </body>
 </html>

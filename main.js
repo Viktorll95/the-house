@@ -74,14 +74,11 @@ const clearOptText = function () {
   btnOptionList.forEach((button) => (button.textContent = ""));
 };
 
+let textingDelayMultiplayer = 100;
+let beforeTextingDelay = 500;
 // "delay is the delay before the npc starts 'texting', and "textingDelay" is the delay that changes the DOM to "xxx texting..." before the text is sent. "currTextDelayTotal" is the combined (total) delay of a message before it is sent
 let currTextDelayTotal = 0;
-const npcMessage = (
-  text,
-  beforeTextingDelay = 500,
-  textingDelay,
-  opTextArr
-) => {
+const npcMessage = (text, beforeTextingDelay, textingDelay, opTextArr) => {
   // Hides the option-buttons
   btnOpHide();
 
@@ -91,7 +88,9 @@ const npcMessage = (
     ? (beforeTextingDelay = currTextDelayTotal + 200)
     : currTextDelayTotal;
   // The variable that holds the amount of time the npc is "texting" before the npc "sends" the text
-  textingDelay = textingDelay ? textingDelay : text.length * 100;
+  textingDelay = textingDelay
+    ? textingDelay
+    : text.length * textingDelayMultiplayer;
   currTextDelayTotal = textingDelay + beforeTextingDelay;
 
   ///////////////////////////////////////////////////////////

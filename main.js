@@ -30,6 +30,7 @@ ticTac.volume = 0.3;
 const horrorMetallicScreeches = document.querySelector(
   "#horror-metallic-screeches"
 );
+const scaryBassSoundEffect = document.querySelector("#scary-bass-sound-effect");
 const tada = document.querySelector("#tada");
 tada.volume = 0.3;
 

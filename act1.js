@@ -726,6 +726,7 @@ const storyFail = {
   },
   part7: function () {
     btnOpHide();
+    scaryBassSoundEffect.play();
     npcMessage(`You won't be hearing from ${npcName} anymore`);
 
     setTimeout(() => {

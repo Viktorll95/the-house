@@ -113,7 +113,7 @@ const a3 = {
   },
 
   p9: function () {
-    fastForwardClock(`${hour}:${minutes + 15}`, a3.p10);
+    fastForwardClock(`${hours}:${minutes + 15}`, a3.p10);
   },
 
   movieVolume: 0,
@@ -190,7 +190,7 @@ const a3 = {
   },
   p13: function () {
     npcMessage(`All right, I'll guess i can watch ${movie} one more time 😉`);
-    fastForwardClock(`${hour}:${minutes + 45}`, a3.p14);
+    fastForwardClock(`${hours}:${minutes + 45}`, a3.p14);
   },
   p14: function () {
     if (a3.movieVolume === 0) {
@@ -284,7 +284,7 @@ const a3 = {
     }
   },
   p19: function () {
-    fastForwardClock(`${hour}:${minutes + 6}`, a3.p20);
+    fastForwardClock(`${hours}:${minutes + 6}`, a3.p20);
   },
   p20: function () {
     btnOpShow([`${npcName}?`, "All good?", "How's it going?"]);
@@ -308,7 +308,7 @@ const a3 = {
     ]);
   },
   p21: function () {
-    fastForwardClock(`${hour}:${minutes + 59}`, a3.p22);
+    fastForwardClock(`${hours}:${minutes + 59}`, a3.p22);
   },
   p22: function () {
     npcMessage("What a movie! Almays good to see a classic");

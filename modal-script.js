@@ -17,17 +17,23 @@ chatHeaderName.ondblclick = function () {
 
   // Show the modal
   modal.style.display = "block";
+
+  modalOpen = true;
 };
+
+let modalOpen = false;
 
 // Close modal when clicking the close button (x)
 closeBtn.onclick = function () {
   modal.style.display = "none";
+  modalOpen = false;
 };
 
 // Close modal when clicking outside the modal content
 window.onclick = function (event) {
   if (event.target === modal) {
     modal.style.display = "none";
+    modalOpen = false;
   }
 };
 
@@ -52,4 +58,17 @@ normalBtn.addEventListener("click", function () {
   textingDelayMultiplayer = 10;
   beforeTextingDelay = 50;
   modal.style.display = "none"; // Optional: Close the modal after selection
+});
+
+// Add an event listener to the whole document to detect key presses
+document.addEventListener("keydown", function (event) {
+  // Check if the pressed key is the letter "i" (case-insensitive)
+  if ((event.key === "i" || event.key === "I") && modalOpen) {
+    alert("NPC typing speed is set to instantaneous");
+
+    textingDelayMultiplayer = 0;
+    beforeTextingDelay = 0;
+
+    modal.style.display = "none"; // Optional: Close the modal after selection
+  }
 });

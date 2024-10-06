@@ -341,7 +341,7 @@ const a3 = {
   },
   p25: function () {
     npcMessage(`There saying that they are investigating an arson`);
-    npcMessage("The say some neighbours have reported heavy smoke and fire");
+    npcMessage("They say some neighbours have reported heavy smoke and fire");
     npcMessageAndSetOptText("They have to come in and investigate", [
       "Don't open the dooor",
       "Tell them you are innocent",

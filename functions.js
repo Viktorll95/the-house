@@ -66,6 +66,28 @@ function madClock() {
   }, 5000);
 }
 
+const sayHi = function () {
+  console.log("hi");
+};
+
+document.querySelector(".chat-header-name").addEventListener("click", () => {
+  console.log("test");
+  fastForwardClock("19:99", sayHi);
+});
+
+// Event listener and function that breaks "fastForward" if it gets stuck
+let manuallyStopFastForward;
+
+clockEl.addEventListener("dblclick", function () {
+  console.log("Fast forward function has been stopped");
+
+  manuallyStopFastForward = true;
+  setTimeout(() => {
+    manuallyStopFastForward = false;
+  }, 5000);
+  // You can add any additional actions here
+});
+
 //////////
 // Give the inputTime like this; fastForwardClock("00:00")
 const fastForwardClock = function (minutesAndHoursString, nextfunction) {
@@ -73,7 +95,11 @@ const fastForwardClock = function (minutesAndHoursString, nextfunction) {
     console.error(
       "fastForwardClock requires a function value to be passed as a second argument"
     );
-
+  if (!/^\d{2}:\d{2}$/.test(minutesAndHoursString)) {
+    console.error(
+      `Error 'minutesAndHoursString': "${minutesAndHoursString}" is not in the correct format (HH:MM).`
+    );
+  }
   let inputTime = minutesAndHoursString.split(":").map((unit) => Number(unit));
 
   // If the time inputed is "18:48+29" ("Which becomes 18:77") this script makes it 19:27
@@ -98,48 +124,57 @@ const fastForwardClock = function (minutesAndHoursString, nextfunction) {
   }
   let totalDiffMinutes = diffHours * 60 + diffMinutes;
 
-  let ffcIntervalPace = 10000 / (totalDiffMinutes + 1) ** 1.1;
+  // Select the clock element by ID
+  const clockElement = document.getElementById("clock");
 
-  let delay = currTextDelayTotal + 2000;
+  // break if the time inputed is the same time as the current time
+  if (totalDiffMinutes === 0) {
+    nextfunction();
+  } else {
+    let ffcIntervalPace = 10000 / (totalDiffMinutes + 1) ** 1.1;
 
-  //TODO: This 'btnOpHide()'-function may cause bugs, but I don't think so (yet)
-  btnOpHide();
+    let delay = currTextDelayTotal + 2000;
 
-  setTimeout(() => {
-    ticTac.play();
-    const flashClockBlueBg = setInterval(() => {
-      clockEl.classList.contains("clock-blue-bgc")
-        ? clockEl.classList.remove("clock-blue-bgc")
-        : clockEl.classList.add("clock-blue-bgc");
-    }, 500);
+    //TODO: This 'btnOpHide()'-function may cause bugs, but I don't think so (yet)
+    btnOpHide();
 
-    const fastForward = setInterval(() => {
-      minutes++;
+    setTimeout(() => {
+      ticTac.play();
+      const flashClockBlueBg = setInterval(() => {
+        clockEl.classList.contains("clock-blue-bgc")
+          ? clockEl.classList.remove("clock-blue-bgc")
+          : clockEl.classList.add("clock-blue-bgc");
+      }, 500);
 
-      if (minutes >= 60) {
-        hours += Math.trunc(minutes / 60);
-        minutes = minutes % 60;
-        diffHours--;
-        if (hours >= 24) hours = hours % 24;
-      }
+      const fastForward = setInterval(() => {
+        minutes++;
 
-      // Updates the clock-element. Returns true if "the time matches 'triggerStroke' and then stops the 'fastforward'-function'
-      let stopFastForward = updateClockEl(hours, minutes);
+        if (minutes >= 60) {
+          hours += Math.trunc(minutes / 60);
+          minutes = minutes % 60;
+          diffHours--;
+          if (hours >= 24) hours = hours % 24;
+        }
 
-      if (
-        (inputTime[0] === hours && inputTime[1] === minutes) ||
-        stopFastForward
-      ) {
-        clearInterval(fastForward);
-        clearInterval(flashClockBlueBg);
-        clockEl.classList.remove("clock-blue-bgc");
-        ticTac.pause();
-        setTimeout(() => {
-          nextfunction();
-        }, 2000);
-      }
-    }, ffcIntervalPace);
-  }, delay);
+        // Updates the clock-element. Returns true if "the time matches 'triggerStroke' and then stops the 'fastforward'-function'
+        let stopFastForward = updateClockEl(hours, minutes);
+
+        if (
+          (inputTime[0] === hours && inputTime[1] === minutes) ||
+          stopFastForward ||
+          manuallyStopFastForward
+        ) {
+          clearInterval(fastForward);
+          clearInterval(flashClockBlueBg);
+          clockEl.classList.remove("clock-blue-bgc");
+          ticTac.pause();
+          setTimeout(() => {
+            nextfunction();
+          }, 2000);
+        }
+      }, ffcIntervalPace);
+    }, delay);
+  }
 };
 
 ///////////////

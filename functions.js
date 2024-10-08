@@ -95,9 +95,9 @@ const fastForwardClock = function (minutesAndHoursString, nextfunction) {
     console.error(
       "fastForwardClock requires a function value to be passed as a second argument"
     );
-  if (!/^\d{2}:\d{2}$/.test(minutesAndHoursString)) {
+  if (!/^\d{1,2}:\d{1,2}$/.test(minutesAndHoursString)) {
     console.error(
-      `Error 'minutesAndHoursString': "${minutesAndHoursString}" is not in the correct format (HH:MM).`
+      `Error 'minutesAndHoursString': "${minutesAndHoursString}" is not in the correct format (H:MM, HH:M, etc.).`
     );
   }
   let inputTime = minutesAndHoursString.split(":").map((unit) => Number(unit));

@@ -51,7 +51,7 @@ const a3 = {
     ]);
     setOpFn([a3.p4, a3.p4, storyFailDemon.part1]);
     setTimeout(() => {
-      if (!p3.abortFailFunc) {
+      if (!a3.abortFailFunc) {
         btnOpHide();
         storyFailDemon.part1();
       }
@@ -189,7 +189,9 @@ const a3 = {
     ]);
   },
   p13: function () {
-    npcMessage(`All right, I'll guess i can watch ${movie} one more time 😉`);
+    npcMessage(
+      `All right, I'll guess i can watch ${a3.movie} one more time 😉`
+    );
     fastForwardClock(`${hours}:${minutes + 45}`, a3.p14);
   },
   p14: function () {

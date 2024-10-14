@@ -74,11 +74,15 @@ const clearOptText = function () {
   btnOptionList.forEach((button) => (button.textContent = ""));
 };
 
+// FIXME: Variables that holds the delay time of the messages. These may have to be deleted and be raplaced in the "npcMessage"-function with just normal values since these seem to disrupt the order of the messages.
+let textingDelayMultiplier = 80;
+let beforeTextingDelayChosenValue = 500;
+
 // "delay is the delay before the npc starts 'texting', and "textingDelay" is the delay that changes the DOM to "xxx texting..." before the text is sent. "currTextDelayTotal" is the combined (total) delay of a message before it is sent
 let currTextDelayTotal = 0;
 const npcMessage = (
   text,
-  beforeTextingDelay = 500,
+  beforeTextingDelay = beforeTextingDelayChosenValue,
   textingDelay,
   opTextArr
 ) => {
@@ -91,7 +95,9 @@ const npcMessage = (
     ? (beforeTextingDelay = currTextDelayTotal + 200)
     : currTextDelayTotal;
   // The variable that holds the amount of time the npc is "texting" before the npc "sends" the text
-  textingDelay = textingDelay ? textingDelay : text.length * 100;
+  textingDelay = textingDelay
+    ? textingDelay
+    : text.length * textingDelayMultiplier;
   currTextDelayTotal = textingDelay + beforeTextingDelay;
 
   ///////////////////////////////////////////////////////////

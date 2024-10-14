@@ -18,7 +18,11 @@ const startStory = function () {
   pre.part1();
   ////////////////////
   // npcName = "Anna";
+<<<<<<< HEAD
   // a3.p1();
+=======
+  // a3.p5();
+>>>>>>> d6567a18e7f6caa28d6f5e750fd83b59eeec5f33
   // a2F.part33();
   // a2End.a2EndPart();
   // storyFailDemon.part1();

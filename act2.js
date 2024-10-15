@@ -40,7 +40,6 @@ const a2F = {
       "We both walked out laughing, and we've been friends ever since.",
       ["She sounds like fun!", "😂😂😂", "How stupid..."]
     );
-    // TODO:TODO:TODO: Implement a function that keeps track of if the npc likes the player
     setOpFn([a2F.part13c, a2F.part13c, a2F.part13c]);
     setOpNpcCom(["She sure is! 😁", "😄👌", "...yeah maybe a bit, anyway..."]);
   },

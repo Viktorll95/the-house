@@ -18,6 +18,7 @@ const startStory = function () {
   pre.part1();
   ////////////////////
   // npcName = "Anna";
+  // act1.part4pre();
   // a3.p5();
   // a2F.part33();
   // a2End.a2EndPart();

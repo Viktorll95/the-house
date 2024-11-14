@@ -135,7 +135,11 @@ const fastForwardClock = function (minutesAndHoursString, nextfunction) {
 
       if (
         (inputTime[0] === hours && inputTime[1] === minutes) ||
-        stopFastForward
+        stopFastForward ||
+        // This booleon down below was added later, as the boolean above didn't trigger as intented, making the clock never stop when it first was fastForwarded
+        `${String(inputTime[0]).padStart(2, 0)}:${
+          String(inputTime[1]).padStart(2, 0) === clockEl.textContent
+        }`
       ) {
         clearInterval(fastForward);
         clearInterval(flashClockBlueBg);

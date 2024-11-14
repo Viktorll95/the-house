@@ -74,15 +74,14 @@ const fastForwardClock = function (minutesAndHoursString, nextfunction) {
       "fastForwardClock requires a function value to be passed as a second argument"
     );
   console.log(minutesAndHoursString);
-
-  let inputTime = minutesAndHoursString.split(":").map((unit) => Number(unit));
-
   // Regular expression to match the allowed formats
   const regex = /^(\d{1,2}):(\d{1,2})$/;
   // Test the input string against the regular expression
-  if (!regex.test(inputTime)) {
+  if (!regex.test(minutesAndHoursString)) {
     console.error("Inputed string format is incorrect", minutesAndHoursString);
   }
+
+  let inputTime = minutesAndHoursString.split(":").map((unit) => Number(unit));
 
   // If the time inputed is "18:48+29" ("Which becomes 18:77") this script makes it 19:27
   if (inputTime[1] >= 60) {
